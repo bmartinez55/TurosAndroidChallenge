@@ -7,6 +7,9 @@ import c.bmartinez.turosandroidchallenge.data.model.*
 import c.bmartinez.turosandroidchallenge.data.repo.YelpRepository
 import kotlinx.coroutines.*
 
+/*
+    Primary viewmodel that connects the model and the view. Calls both pizza and beer endpoints with coroutines
+ */
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
@@ -42,15 +45,20 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                     loading.value = false
                 } else {
                     Log.d(MainViewModel::class.java.name, response.message())
-                    onError("Error: ${response.message()}")
+                    try{
+                        onError("Error: ${response.message()}")
+                    } catch(e: Exception) { Log.d(MainViewModel::class.java.name, e.localizedMessage)}
                 }
             }
         }
     }
 
     private fun onError(message: String) {
-        errorMessage.value = message
-        loading.value = false
+        try{
+            errorMessage.value = message
+            loading.value = false
+        } catch(e: Exception) { Log.d(MainViewModel::class.java.name, e.localizedMessage) }
+
     }
 
     override fun onCleared() {
