@@ -35,22 +35,22 @@
                 android:id="@+id/itemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                tools:text="Loading Title..." />
+                android:hint="Loading Title..."
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/itemAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                tools:text="Loading Address..." />
+                android:hint="Loading Address..."
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/itemDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                tools:text="Loading Distance..." />
+                android:hint="Loading Distance..."
+                android:textStyle="bold" />
 
 
         </LinearLayout>

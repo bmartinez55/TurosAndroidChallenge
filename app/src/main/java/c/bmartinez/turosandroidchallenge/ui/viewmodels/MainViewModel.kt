@@ -2,16 +2,15 @@ package c.bmartinez.turosandroidchallenge.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import c.bmartinez.turosandroidchallenge.data.model.YelpSearchBeerResults
-import c.bmartinez.turosandroidchallenge.data.model.YelpSearchPizzaResults
+import c.bmartinez.turosandroidchallenge.data.model.*
 import c.bmartinez.turosandroidchallenge.data.repo.YelpRepository
 import kotlinx.coroutines.*
 
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
-    private val errorMessage = MutableLiveData<String>()
-    private val pizzaData = MutableLiveData<List<YelpSearchPizzaResults>>()
-    private val beerData = MutableLiveData<List<YelpSearchBeerResults>>()
+    val errorMessage = MutableLiveData<String>()
+    val pizzaData = MutableLiveData<List<Data>>()
+    val beerData = MutableLiveData<List<Data>>()
     var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
         onError("Exceptoin handled: ${exception.localizedMessage}")
@@ -26,7 +25,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                     pizzaData.postValue(response.body())
                     loading.value = false
                 } else {
-                    onError("Error: ${response.message()}")
+                    onError("Error: ${response.message()} ")
                 }
             }
         }

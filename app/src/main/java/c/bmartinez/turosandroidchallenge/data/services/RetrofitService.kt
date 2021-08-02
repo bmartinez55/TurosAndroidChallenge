@@ -1,7 +1,6 @@
 package c.bmartinez.turosandroidchallenge.data.services
 
-import c.bmartinez.turosandroidchallenge.data.model.YelpSearchBeerResults
-import c.bmartinez.turosandroidchallenge.data.model.YelpSearchPizzaResults
+import c.bmartinez.turosandroidchallenge.data.model.*
 import c.bmartinez.turosandroidchallenge.utils.YelpConstants
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -18,7 +17,7 @@ interface RetrofitService {
         @Query("term") searchTerm: String,
         @Query("location") location: String,
         @Query("radius") searchRadius: Int
-    ): Response<List<YelpSearchPizzaResults>>
+    ): Response<List<Data>>
 
     @GET("businesses/search/")
     suspend fun getAllBeerLocations(
@@ -26,7 +25,7 @@ interface RetrofitService {
         @Query("term") searchTerm: String,
         @Query("location") location: String,
         @Query("radius") searchRadius: Int
-    ): Response<List<YelpSearchBeerResults>>
+    ): Response<List<Data>>
 
     companion object {
         var retrofitService: RetrofitService? = null
