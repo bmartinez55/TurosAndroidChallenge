@@ -9,11 +9,11 @@ import kotlinx.coroutines.*
 
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
-    val errorMessage = MutableLiveData<String>()
-    val pizzaData = MutableLiveData<List<YelpSearchPizzaResults>>()
-    val beerData = MutableLiveData<List<YelpSearchBeerResults>>()
+    private val errorMessage = MutableLiveData<String>()
+    private val pizzaData = MutableLiveData<List<YelpSearchPizzaResults>>()
+    private val beerData = MutableLiveData<List<YelpSearchBeerResults>>()
     var job: Job? = null
-    val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
+    private val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
         onError("Exceptoin handled: ${exception.localizedMessage}")
     }
     private val loading = MutableLiveData<Boolean>()
