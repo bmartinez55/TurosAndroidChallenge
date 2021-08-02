@@ -9,6 +9,9 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
+/*
+    Interface that holds all endpoint calls
+ */
 interface RetrofitService {
 
     @GET("businesses/search")

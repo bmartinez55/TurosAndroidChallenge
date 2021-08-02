@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import c.bmartinez.turosandroidchallenge.data.repo.YelpRepository
 import java.lang.IllegalArgumentException
 
+/*
+    Helps creating an instance of viewmodel(s)
+ */
 class MyViewModelFactory constructor(private val repository: YelpRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
