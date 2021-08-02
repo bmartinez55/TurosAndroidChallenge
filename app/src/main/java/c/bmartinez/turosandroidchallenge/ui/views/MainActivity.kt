@@ -1,4 +1,4 @@
-package c.bmartinez.turosandroidchallenge.ui
+package c.bmartinez.turosandroidchallenge.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
