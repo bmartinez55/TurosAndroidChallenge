@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface RetrofitService {
 
-    @GET("businesses/search/")
+    @GET("businesses/search")
     suspend fun getAllPizzaLocations(
         @Header("Authorization") authHeader: String,
         @Query("term") searchTerm: String,
@@ -19,7 +19,7 @@ interface RetrofitService {
         @Query("radius") searchRadius: Int
     ): Response<List<Data>>
 
-    @GET("businesses/search/")
+    @GET("businesses/search")
     suspend fun getAllBeerLocations(
         @Header("Authorization") authHeader: String,
         @Query("term") searchTerm: String,

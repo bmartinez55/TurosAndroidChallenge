@@ -1,5 +1,6 @@
 package c.bmartinez.turosandroidchallenge.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import c.bmartinez.turosandroidchallenge.data.model.*
@@ -36,9 +37,11 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
             val response = yelpRepository.getAllBeerLocations()
             withContext(Dispatchers.Main) {
                 if(response.isSuccessful){
+                    Log.d(MainViewModel::class.java.name, response.body().toString())
                     beerData.postValue(response.body())
                     loading.value = false
                 } else {
+                    Log.d(MainViewModel::class.java.name, response.message())
                     onError("Error: ${response.message()}")
                 }
             }
