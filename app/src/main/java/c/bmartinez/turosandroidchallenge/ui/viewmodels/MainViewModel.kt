@@ -21,6 +21,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
     }
     private val loading = MutableLiveData<Boolean>()
 
+    //Calls endpoint and gets the response and either add data to list or send error message to onError method
     fun getAllPizzaLocations() {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
             val response = yelpRepository.getAllPizzaLocations()
@@ -34,7 +35,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
             }
         }
     }
-
+    //Calls endpoint and gets the response and either add data to list or send error message to onError method
     fun getAllBeerLocations() {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
             val response = yelpRepository.getAllBeerLocations()
