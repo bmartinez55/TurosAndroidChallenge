@@ -3,6 +3,9 @@ package c.bmartinez.turosandroidchallenge.data.repo
 import c.bmartinez.turosandroidchallenge.data.services.RetrofitService
 import c.bmartinez.turosandroidchallenge.utils.YelpConstants
 
+/*
+    This class holds the endpoint calls with query search data
+ */
 class YelpRepository constructor(private val retrofitService: RetrofitService) {
 
     suspend fun getAllPizzaLocations() = retrofitService.getAllPizzaLocations(
