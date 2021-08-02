@@ -33,8 +33,10 @@ class MainActivity : AppCompatActivity() {
         adapter = ResultsAdapter(this, data)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         val retrofitService = RetrofitService.getInstance()
         val yelpRepo = YelpRepository(retrofitService)
+
         viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepo)).get(MainViewModel::class.java)
         viewModel.pizzaData.observe(this, {
             for(x in it){
