@@ -1,7 +1,8 @@
-package c.bmartinez.turosandroidchallenge
+package c.bmartinez.turosandroidchallenge.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import c.bmartinez.turosandroidchallenge.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
