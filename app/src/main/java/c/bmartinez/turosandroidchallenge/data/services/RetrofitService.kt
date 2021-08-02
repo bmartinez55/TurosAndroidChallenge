@@ -16,14 +16,16 @@ interface RetrofitService {
     suspend fun getAllPizzaLocations(
         @Header("Authorization") authHeader: String,
         @Query("term") searchTerm: String,
-        @Query("location") location: String
+        @Query("location") location: String,
+        @Query("radius") searchRadius: Int
     ): Response<List<YelpSearchPizzaResults>>
 
     @GET("businesses/search/")
     suspend fun getAllBeerLocations(
         @Header("Authorization") authHeader: String,
         @Query("term") searchTerm: String,
-        @Query("location") location: String
+        @Query("location") location: String,
+        @Query("radius") searchRadius: Int
     ): Response<List<YelpSearchBeerResults>>
 
     companion object {
