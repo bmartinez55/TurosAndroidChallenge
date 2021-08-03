@@ -1,4 +1,4 @@
-package c.bmartinez.turosandroidchallenge
+package c.bmartinez.yelpclone
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package c.bmartinez.turosandroidchallenge.ui.views
+package c.bmartinez.yelpclone.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,15 +7,18 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import c.bmartinez.turosandroidchallenge.R
-import c.bmartinez.turosandroidchallenge.data.model.Data
-import c.bmartinez.turosandroidchallenge.data.repo.YelpRepository
-import c.bmartinez.turosandroidchallenge.data.services.RetrofitService
-import c.bmartinez.turosandroidchallenge.ui.viewmodels.MainViewModel
-import c.bmartinez.turosandroidchallenge.ui.viewmodels.MyViewModelFactory
+import c.bmartinez.yelpclone.R
+import c.bmartinez.yelpclone.data.model.Pizza
+import c.bmartinez.yelpclone.data.repo.YelpRepository
+import c.bmartinez.yelpclone.data.services.RetrofitService
+import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
+import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
+import com.google.gson.Gson
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = MainActivity::class.java.name
     lateinit var viewModel: MainViewModel
     lateinit var adapter: ResultsAdapter
     lateinit var recyclerView: RecyclerView
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val data = mutableListOf<Data>()
+        val data = mutableListOf<Pizza>()
         adapter = ResultsAdapter(this, data)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -38,24 +41,27 @@ class MainActivity : AppCompatActivity() {
         val yelpRepo = YelpRepository(retrofitService)
 
         viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepo)).get(MainViewModel::class.java)
+        viewModel.getAllPizzaLocations()
         viewModel.pizzaData.observe(this, {
-            for(x in it){
-                data.add(x)
+            if(it.isEmpty()){
+                Log.d(TAG, "Search came back empty")
+            } else {
+                data.addAll(it)
+                adapter.notifyDataSetChanged()
             }
         })
-        viewModel.beerData.observe(this, {
-            for(m in it){
-                data.add(m)
-            }
-        })
-        adapter.notifyDataSetChanged()
+//        viewModel.beerData.observe(this, {
+//            for(m in it){
+//                data.add(m)
+//            }
+//        })
         viewModel.errorMessage.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             Log.d(MainActivity::class.java.name, it)
             adapter.notifyDataSetChanged()
         })
-        viewModel.getAllPizzaLocations()
-        viewModel.getAllBeerLocations()
+
+        //viewModel.getAllBeerLocations()
     }
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="c.bmartinez.turosandroidchallenge">
+    package="c.bmartinez.yelpclone">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TurosAndroidChallenge">
-        <activity android:name=".ui.views.MainActivity">
+        <activity android:name="c.bmartinez.yelpclone.ui.views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

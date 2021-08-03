@@ -1,8 +1,8 @@
-package c.bmartinez.turosandroidchallenge.ui.viewmodels
+package c.bmartinez.yelpclone.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import c.bmartinez.turosandroidchallenge.data.repo.YelpRepository
+import c.bmartinez.yelpclone.data.repo.YelpRepository
 import java.lang.IllegalArgumentException
 
 /*
