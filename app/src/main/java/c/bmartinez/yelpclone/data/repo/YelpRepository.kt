@@ -12,19 +12,20 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
         searchTerm,
         YelpConstants().officeAddress,
         YelpConstants().searchRadius,
-        "distance"
+        "distance",
+        YelpConstants().maxResults
     )
 
-    suspend fun getAllPizzaLocations() = retrofitService.getAllPizzaLocations(
-        "pizza",
+    suspend fun getPopularLocations() = retrofitService.getPopularLocations(
         YelpConstants().officeAddress,
         YelpConstants().searchRadius,
-        "distance"
+        "rating",
+        YelpConstants().maxResults
     )
 
-    suspend fun getAllBeerLocations() = retrofitService.getAllBeerLocations(
-        "beer",
-        YelpConstants().officeAddress,
-        YelpConstants().searchRadius
-    )
+//    suspend fun getAllBeerLocations() = retrofitService.getAllBeerLocations(
+//        "beer",
+//        YelpConstants().officeAddress,
+//        YelpConstants().searchRadius
+//    )
 }
