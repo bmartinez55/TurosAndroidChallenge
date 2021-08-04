@@ -17,8 +17,8 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
 
     val TAG = MainViewModel::class.java.name
     val errorMessage = MutableLiveData<String>()
-    val pizzaData = MutableLiveData<List<Pizza>>()
-    val beerData = MutableLiveData<List<YelpSearchBeerResults>>()
+    val pizzaData = MutableLiveData<List<Results>>()
+    val beerData = MutableLiveData<List<YelpSearchResults>>()
 
     private val loading = MutableLiveData<Boolean>()
 
