@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import c.bmartinez.yelpclone.R
-import c.bmartinez.yelpclone.data.model.Pizza
+import c.bmartinez.yelpclone.data.model.Results
 import c.bmartinez.yelpclone.data.repo.YelpRepository
 import c.bmartinez.yelpclone.data.services.RetrofitService
 import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val data = mutableListOf<Pizza>()
+        val data = mutableListOf<Results>()
         adapter = ResultsAdapter(this, data)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)

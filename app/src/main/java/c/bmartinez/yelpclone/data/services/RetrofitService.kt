@@ -24,14 +24,14 @@ interface RetrofitService {
         @Query("location") location: String,
         @Query("radius") searchRadius: Int,
         @Query("sort_by") sortBy: String
-    ): Response<YelpSearchPizzaResults>
+    ): Response<YelpSearchResults>
 
     @GET("businesses/search")
     suspend fun getAllBeerLocations(
         @Query("term") searchTerm: String,
         @Query("location") location: String,
         @Query("radius") searchRadius: Int
-    ): Response<YelpSearchBeerResults>
+    ): Response<YelpSearchResults>
 
     companion object {
         var retrofitService: RetrofitService? = null
