@@ -10,6 +10,7 @@ import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Pizza
 import c.bmartinez.yelpclone.utils.YelpConstants
 import com.bumptech.glide.Glide
+import java.text.DecimalFormat
 
 class ResultsAdapter (private val context: Context, private val data: List<Pizza>): RecyclerView.Adapter<ResultsAdapter.ViewHolder>(){
 
@@ -30,7 +31,8 @@ class ResultsAdapter (private val context: Context, private val data: List<Pizza
             Glide.with(context).load(p.image_url).into(itemView.findViewById(R.id.itemImage))
             val address = p.location.address + " " + p.location.city + ", " + p.location.state + " " + p.location.zipCode
             itemView.findViewById<TextView>(R.id.itemAddress).text = address
-            val miles = (p.distance / YelpConstants().metersInMile).toString() + " mi"
+            val decFormat = DecimalFormat("#.##")
+            val miles = (decFormat.format(p.distance / YelpConstants().metersInMile)).toString() + " mi"
             itemView.findViewById<TextView>(R.id.itemDistance).text = miles
         }
     }

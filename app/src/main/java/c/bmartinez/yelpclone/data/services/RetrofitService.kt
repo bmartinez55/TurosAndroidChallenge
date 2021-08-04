@@ -16,19 +16,22 @@ import java.util.concurrent.TimeUnit
  */
 interface RetrofitService {
 
+
+
     @GET("businesses/search")
     suspend fun getAllPizzaLocations(
         @Query("term") searchTerm: String,
         @Query("location") location: String,
-        @Query("radius") searchRadius: Int
-    ): Response<List<YelpSearchPizzaResults>>
+        @Query("radius") searchRadius: Int,
+        @Query("sort_by") sortBy: String
+    ): Response<YelpSearchPizzaResults>
 
     @GET("businesses/search")
     suspend fun getAllBeerLocations(
         @Query("term") searchTerm: String,
         @Query("location") location: String,
         @Query("radius") searchRadius: Int
-    ): Response<List<YelpSearchBeerResults>>
+    ): Response<YelpSearchBeerResults>
 
     companion object {
         var retrofitService: RetrofitService? = null

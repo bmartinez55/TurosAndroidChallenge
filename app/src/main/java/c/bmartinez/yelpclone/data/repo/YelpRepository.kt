@@ -11,7 +11,8 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
     suspend fun getAllPizzaLocations() = retrofitService.getAllPizzaLocations(
         "pizza",
         YelpConstants().officeAddress,
-        YelpConstants().searchRadius
+        YelpConstants().searchRadius,
+        "distance"
     )
 
     suspend fun getAllBeerLocations() = retrofitService.getAllBeerLocations(
