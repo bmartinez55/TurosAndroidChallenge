@@ -13,8 +13,6 @@ import c.bmartinez.yelpclone.data.repo.YelpRepository
 import c.bmartinez.yelpclone.data.services.RetrofitService
 import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
 import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
-import com.google.gson.Gson
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 //        })
         viewModel.errorMessage.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            Log.d(MainActivity::class.java.name, it)
+            Log.d(TAG, it)
             adapter.notifyDataSetChanged()
         })
 
