@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         yelpRepository = YelpRepository(retrofitService)
         viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
 
-        //getData()
+        getPopularLocations()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,31 +90,19 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    //private fun getData() {
-
-
-//        viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepo)).get(MainViewModel::class.java)
-//        viewModel.getAllPizzaLocations()
-//        viewModel.pizzaData.observe(this, {
-//            if(it.isEmpty()){
-//                Log.d(TAG, "Search came back empty")
-//            } else {
-//                data.addAll(it)
-//                adapter.notifyDataSetChanged()
-//            }
-//        })
-//        viewModel.beerData.observe(this, {
-//            for(m in it){
-//                data.add(m)
-//            }
-//        })
-//        viewModel.errorMessage.observe(this, {
-//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-//            Log.d(TAG, it)
-//            adapter.notifyDataSetChanged()
-//        })
-//
-//        //viewModel.getAllBeerLocations()
-//    }
+    private fun getPopularLocations() {
+        viewModel.getPopularLocations()
+        viewModel.data.observe(this, {
+            if(it.isEmpty()){
+                Log.d(TAG, "Search came back empty")
+            } else {
+                if(data.isNotEmpty()){
+                    data.clear()
+                }
+                data.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
+        })
+    }
 
 }

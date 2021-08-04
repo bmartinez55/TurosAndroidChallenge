@@ -6,4 +6,5 @@ class YelpConstants {
     val officeAddress = "1515 Wheeler Dr, Salinas, CA 93906"
     val searchRadius = 40000  //This is approx. 25 miles
     val metersInMile = 1609.344 //This is what one mile is in meters
+    val maxResults = 50
 }
