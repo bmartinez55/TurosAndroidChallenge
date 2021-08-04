@@ -8,6 +8,13 @@ import c.bmartinez.yelpclone.utils.YelpConstants
  */
 class YelpRepository constructor(private val retrofitService: RetrofitService) {
 
+    suspend fun getSearchResults(searchTerm: String) = retrofitService.getSearchResults(
+        searchTerm,
+        YelpConstants().officeAddress,
+        YelpConstants().searchRadius,
+        "distance"
+    )
+
     suspend fun getAllPizzaLocations() = retrofitService.getAllPizzaLocations(
         "pizza",
         YelpConstants().officeAddress,
