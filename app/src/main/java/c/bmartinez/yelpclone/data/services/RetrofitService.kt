@@ -16,7 +16,13 @@ import java.util.concurrent.TimeUnit
  */
 interface RetrofitService {
 
-
+    @GET("businesses/search")
+    suspend fun getSearchResults(
+        @Query("term") searchTerm: String,
+        @Query("location") location: String,
+        @Query("radius") searchRadius: Int,
+        @Query("sort_by") sortBy: String
+    ): Response<YelpSearchResults>
 
     @GET("businesses/search")
     suspend fun getAllPizzaLocations(

@@ -16,11 +16,21 @@ import org.json.JSONObject
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
     val TAG = MainViewModel::class.java.name
-    val errorMessage = MutableLiveData<String>()
-    val pizzaData = MutableLiveData<List<Results>>()
-    val beerData = MutableLiveData<List<YelpSearchResults>>()
+    val data = MutableLiveData<List<Results>>()
 
-    private val loading = MutableLiveData<Boolean>()
+    //Calls search endpoint
+    fun getSearchResults(searchTerm: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try{
+                val response = yelpRepository.getSearchResults(searchTerm)
+                if(response.body() != null){
+                    data.postValue(response.body()!!.restaurants.toList())
+                } else {
+                    Log.d(TAG, response.message())
+                }
+            } catch(e: Exception) { Log.d(TAG, "Inside searchResults catch: ${e.stackTraceToString()}")}
+        }
+    }
 
     //Calls endpoint and gets the response and either add data to list or send error message to onError method
     fun getAllPizzaLocations() {
@@ -28,8 +38,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
             try {
                 val response = yelpRepository.getAllPizzaLocations()
                 if(response.body() != null){
-                    pizzaData.postValue(response.body()!!.restaurants.toList())
-                    loading.postValue(false)
+                    data.postValue(response.body()!!.restaurants.toList())
                 } else {
                     Log.d(TAG, response.message())
                 }
@@ -55,13 +64,5 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
             //}
         }
     }
-
-//    private fun onError(message: String) {
-//        try{
-//            errorMessage.value = message
-//            loading.value = false
-//        } catch(e: Exception) { Log.d(MainViewModel::class.java.name,"onError: " + e.localizedMessage) }
-//
-//    }
 
 }
