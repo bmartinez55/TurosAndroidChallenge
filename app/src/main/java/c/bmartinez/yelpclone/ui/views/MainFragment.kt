@@ -3,6 +3,7 @@ package c.bmartinez.yelpclone.ui.views
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ class MainFragment: Fragment() {
     lateinit var viewModel: MainViewModel
     lateinit var adapter: ResultsAdapter
     lateinit var recyclerView: RecyclerView
+    lateinit var progressDialog: ProgressBar
     lateinit var menu: Menu
     lateinit var retrofitService: RetrofitService
     lateinit var yelpRepository: YelpRepository
@@ -34,6 +36,9 @@ class MainFragment: Fragment() {
         setHasOptionsMenu(true)
 
         recyclerView = view.findViewById(R.id.recyclerView)
+        progressDialog = view.findViewById(R.id.progress_dialog)
+        recyclerView.visibility = View.GONE
+        progressDialog.visibility = View.VISIBLE
         adapter = ResultsAdapter(this.requireContext(), data)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
@@ -78,21 +83,26 @@ class MainFragment: Fragment() {
                     data.clear()
                 }
                 data.addAll(it)
+                progressDialog.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
                 adapter.notifyDataSetChanged()
             }
         })
     }
 
     private fun searchData(searchTerm: String){
+        progressDialog.visibility = View.VISIBLE
         viewModel.getSearchResults(searchTerm)
         viewModel.data.observe(this, {
             if(it.isEmpty()){
                 Log.d(TAG, "Search came back empty")
+                progressDialog.visibility = View.GONE
             } else {
                 if(data.isNotEmpty()){
                     data.clear()
                 }
                 data.addAll(it)
+                progressDialog.visibility = View.GONE
                 adapter.notifyDataSetChanged()
             }
         })
