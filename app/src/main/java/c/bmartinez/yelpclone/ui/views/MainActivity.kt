@@ -22,87 +22,59 @@ import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
 class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.name
-    lateinit var viewModel: MainViewModel
-    lateinit var adapter: ResultsAdapter
-    lateinit var recyclerView: RecyclerView
-    lateinit var menu: Menu
-    lateinit var retrofitService: RetrofitService
-    lateinit var yelpRepository: YelpRepository
-    var data = mutableListOf<Results>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recyclerView)
-        adapter = ResultsAdapter(this, data)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        retrofitService = RetrofitService.getInstance()
-        yelpRepository = YelpRepository(retrofitService)
-        viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
-
-        getPopularLocations()
+        val mainFragment: MainFragment = MainFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_frag_container, mainFragment).commitAllowingStateLoss()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        this.menu = menu!!
-        menuInflater.inflate(R.menu.main_menu, menu)
+    //override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        this.menu = menu!!
+//        menuInflater.inflate(R.menu.main_menu, menu)
+//
+//        val searchItem: MenuItem = menu.findItem(R.id.search)
+//        val searchView: androidx.appcompat.widget.SearchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+//
+//        searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(input: String?): Boolean {
+//                if(!input.isNullOrBlank()){
+//                    searchData(input)
+//                    return false
+//                }
+//                return true
+//            }
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//                return true
+//            }
+//
+//        })
+//        return true
+    //}
 
-        val searchItem: MenuItem = menu.findItem(R.id.search)
-        val searchView: androidx.appcompat.widget.SearchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-
-        searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(input: String?): Boolean {
-                if(!input.isNullOrBlank()){
-                    searchData(input)
-                    return false
-                }
-                return true
-            }
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return true
-            }
-
-        })
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.search -> return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun searchData(searchTerm: String){
-        viewModel.getSearchResults(searchTerm)
-        viewModel.data.observe(this, {
-            if(it.isEmpty()){
-                Log.d(TAG, "Search came back empty")
-            } else {
-                if(data.isNotEmpty()){
-                    data.clear()
-                }
-                data.addAll(it)
-                adapter.notifyDataSetChanged()
-            }
-        })
-    }
-
-    private fun getPopularLocations() {
-        viewModel.getPopularLocations()
-        viewModel.data.observe(this, {
-            if(it.isEmpty()){
-                Log.d(TAG, "Search came back empty")
-            } else {
-                if(data.isNotEmpty()){
-                    data.clear()
-                }
-                data.addAll(it)
-                adapter.notifyDataSetChanged()
-            }
-        })
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId) {
+//            R.id.search -> return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
+//
+//    private fun searchData(searchTerm: String){
+//        viewModel.getSearchResults(searchTerm)
+//        viewModel.data.observe(this, {
+//            if(it.isEmpty()){
+//                Log.d(TAG, "Search came back empty")
+//            } else {
+//                if(data.isNotEmpty()){
+//                    data.clear()
+//                }
+//                data.addAll(it)
+//                adapter.notifyDataSetChanged()
+//            }
+//        })
+//    }
 
 }
