@@ -27,7 +27,8 @@ interface RetrofitService {
 
     @GET("businesses/search")
     suspend fun getPopularLocations(
-        @Query("location") location: String,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
         @Query("radius") searchRadius: Int,
         @Query("sort_by") sortBy: String,
         @Query("limit") maxLimit: Int

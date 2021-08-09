@@ -10,6 +10,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.ui.views.MainActivity
+import c.bmartinez.yelpclone.utils.LocationUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SplashScreen: AppCompatActivity() {
 
@@ -23,17 +27,16 @@ class SplashScreen: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         Log.d(TAG, "Inside onCreate()")
-        Log.d(TAG, "After setting the content view")
 
-        checkLocationPermissions()
     }
 
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "Inside onResume()")
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            startMainActivity()
-        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            GlobalScope.launch(Dispatchers.IO) { checkLocationPermissions() }
+        }, 5000)
     }
 
     override fun onRequestPermissionsResult(
@@ -44,7 +47,7 @@ class SplashScreen: AppCompatActivity() {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_LOCATION -> {
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    if(LocationUtils().checkLocationPermissions(this)) {
                         startMainActivity()
                     }
                 } else {
@@ -65,6 +68,8 @@ class SplashScreen: AppCompatActivity() {
                     MY_PERMISSIONS_REQUEST_LOCATION
                 )
             }
+        } else {
+            startMainActivity()
         }
     }
 
