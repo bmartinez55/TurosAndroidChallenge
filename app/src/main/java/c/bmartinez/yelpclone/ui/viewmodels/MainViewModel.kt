@@ -33,10 +33,10 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
     }
 
     //Calls popular endpoint to get popular locations near by
-    fun getPopularLocations() {
+    fun getPopularLocations(latitude: Double?, longitude: Double?) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = yelpRepository.getPopularLocations()
+                val response = yelpRepository.getPopularLocations(latitude!!, longitude!!)
                 if(response.body() != null){
                     data.postValue(response.body()!!.restaurants.toList())
                 } else {

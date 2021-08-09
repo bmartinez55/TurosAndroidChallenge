@@ -16,8 +16,9 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
         YelpConstants().maxResults
     )
 
-    suspend fun getPopularLocations() = retrofitService.getPopularLocations(
-        YelpConstants().officeAddress,
+    suspend fun getPopularLocations(latitude: Double, longitude: Double) = retrofitService.getPopularLocations(
+        latitude,
+        longitude,
         YelpConstants().searchRadius,
         "rating",
         YelpConstants().maxResults
