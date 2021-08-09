@@ -15,14 +15,14 @@ import org.json.JSONObject
  */
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
-    val TAG = MainViewModel::class.java.name
+    private val TAG: String = MainViewModel::class.java.name
     val data = MutableLiveData<List<Results>>()
 
     //Calls search endpoint to get locations based on the search term
-    fun getSearchResults(searchTerm: String) {
+    fun getSearchResults(searchTerm: String, latitude: Double?, longitude: Double?) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                val response = yelpRepository.getSearchResults(searchTerm)
+                val response = yelpRepository.getSearchResults(searchTerm, latitude!!, longitude!!)
                 if(response.body() != null){
                     data.postValue(response.body()!!.restaurants.toList())
                 } else {

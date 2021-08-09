@@ -46,7 +46,7 @@ class MainFragment: Fragment() {
     private var sharedPreferences: SharedPreferences? = null
 
     companion object {
-        val REQUEST_INTERVAL: Long = 1000 * 60 * 30
+        const val REQUEST_INTERVAL: Long = 1000 * 60 * 30
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -158,8 +158,10 @@ class MainFragment: Fragment() {
     }
 
     private fun searchData(searchTerm: String){
+        val latitude: Double? = sharedPreferences?.getFloat(SharedPreferencesUtils().COORDINATES_LAT, 0.0f)?.toDouble()
+        val longitude: Double? = sharedPreferences?.getFloat(SharedPreferencesUtils().COORDINATES_LONG, 0.0f)?.toDouble()
         progressDialog.visibility = View.VISIBLE
-        viewModel.getSearchResults(searchTerm)
+        viewModel.getSearchResults(searchTerm, latitude, longitude)
         viewModel.data.observe(this, {
             if(it.isEmpty()){
                 Log.d(TAG, "Search came back empty")

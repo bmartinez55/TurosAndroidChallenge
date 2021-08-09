@@ -8,12 +8,13 @@ import c.bmartinez.yelpclone.utils.YelpConstants
  */
 class YelpRepository constructor(private val retrofitService: RetrofitService) {
 
-    suspend fun getSearchResults(searchTerm: String) = retrofitService.getSearchResults(
+    suspend fun getSearchResults(searchTerm: String, latitude: Double, longitude: Double) = retrofitService.getSearchResults(
         searchTerm,
-        YelpConstants().officeAddress,
+        latitude,
+        longitude,
         YelpConstants().searchRadius,
         "distance",
-        YelpConstants().maxResults
+        YelpConstants().maxListResults
     )
 
     suspend fun getPopularLocations(latitude: Double, longitude: Double) = retrofitService.getPopularLocations(
@@ -21,7 +22,7 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
         longitude,
         YelpConstants().searchRadius,
         "rating",
-        YelpConstants().maxResults
+        YelpConstants().maxPopularResults
     )
 
 //    suspend fun getAllBeerLocations() = retrofitService.getAllBeerLocations(
