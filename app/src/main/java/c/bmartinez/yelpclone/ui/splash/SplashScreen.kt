@@ -1,6 +1,8 @@
 package c.bmartinez.yelpclone.ui.splash
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
@@ -11,6 +13,8 @@ import androidx.core.content.ContextCompat
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.ui.views.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
+import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.YelpConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -48,11 +52,11 @@ class SplashScreen: AppCompatActivity() {
             MY_PERMISSIONS_REQUEST_LOCATION -> {
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if(LocationUtils().checkLocationPermissions(this)) {
-                        startMainActivity()
+                        startMainActivity(true)
                     }
                 } else {
                     Toast.makeText(this, "Permission Denied: certain features will not work properly", Toast.LENGTH_SHORT).show()
-                    startMainActivity()
+                    startMainActivity(false)
                 }
             }
         }
@@ -60,21 +64,29 @@ class SplashScreen: AppCompatActivity() {
     }
 
     private fun checkLocationPermissions(){
-        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if(!LocationUtils().checkLocationPermissions(this)) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
                 ActivityCompat.requestPermissions(
                     this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
                     MY_PERMISSIONS_REQUEST_LOCATION
                 )
             }
         } else {
-            startMainActivity()
+            if(LocationUtils().checkLocationPermissions(this)){
+                Log.d(TAG, "Location permissions granted")
+            }
+            Log.d(TAG, "Location permissions aren't granted")
+            startMainActivity(false)
         }
     }
 
-    private fun startMainActivity(){
+    private fun startMainActivity(permissionGranted: Boolean){
         Log.d(TAG, "Before switching to MainActivity")
+
+        if(permissionGranted){ SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1) }
+        else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)}
+
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
