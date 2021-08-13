@@ -73,11 +73,7 @@ class SplashScreen: AppCompatActivity() {
                 )
             }
         } else {
-            if(LocationUtils().checkLocationPermissions(this)){
-                Log.d(TAG, "Location permissions granted")
-            }
-            Log.d(TAG, "Location permissions aren't granted")
-            startMainActivity(false)
+            startMainActivity(true)
         }
     }
 
