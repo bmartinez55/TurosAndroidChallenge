@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import c.bmartinez.yelpclone.R
@@ -27,9 +29,13 @@ class SplashScreen: AppCompatActivity() {
         private const val MY_PERMISSIONS_REQUEST_LOCATION = 99
     }
 
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContent {
+            SplashComposeComponents().splashParentLayout()
+        }
+        //setContentView(R.layout.activity_splash_screen)
         Log.d(TAG, "Inside onCreate()")
 
     }

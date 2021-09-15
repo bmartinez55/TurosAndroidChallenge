@@ -12,8 +12,13 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import c.bmartinez.yelpclone.R
@@ -24,6 +29,7 @@ import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
 import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.YelpConstants
 import com.google.android.gms.location.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -50,6 +56,8 @@ class MainFragment: Fragment() {
     //Variables for location services turned off
     private lateinit var nonLocImageView: ImageView
     private lateinit var nonLocTextView: TextView
+
+    private var isProgressDisplayed: Boolean = false
 
     companion object {
         const val REQUEST_INTERVAL: Long = 1000 * 60 * 30
@@ -98,37 +106,62 @@ class MainFragment: Fragment() {
     }
 
     private fun initView(view: View){
-        recyclerView = view.findViewById(R.id.recyclerView)
-        progressDialog = view.findViewById(R.id.progress_dialog)
-        nonLocImageView = view.findViewById(R.id.nonLocImageView)
-        nonLocTextView = view.findViewById(R.id.nonLocTextView)
+//        recyclerView = view.findViewById(R.id.recyclerView)
+//        progressDialog = view.findViewById(R.id.progress_dialog)
+//        nonLocImageView = view.findViewById(R.id.nonLocImageView)
+//        nonLocTextView = view.findViewById(R.id.nonLocTextView)
 
         isPermitted = SharedPreferencesUtils.getIntegerPref(requireContext(), SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)!!
 
         if(isPermitted == 1){
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
-            recyclerView.visibility = View.GONE
-            progressDialog.visibility = View.VISIBLE
-            nonLocImageView.visibility = View.GONE
-            nonLocTextView.visibility = View.GONE
-
-            adapter = ResultsAdapter(requireContext(), data)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
             retrofitService = RetrofitService.getInstance()
             yelpRepository = YelpRepository(retrofitService)
             viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
 
+            isProgressDisplayed = viewModel.loading.value
+            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
+                MaterialTheme() {
+                    Column(Modifier) {
+                        MainFragComposeComponents().mainFragProgressDialog(isProgressDisplayed)
+                    }
+                }
+            }
+        } else {
+            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
+                MaterialTheme() {
+                    Column(Modifier) {
+
+                    }
+                }
+            }
+        }
+
+
+
+
+       // if(isPermitted == 1){
+
+
+//            recyclerView.visibility = View.GONE
+//            progressDialog.visibility = View.VISIBLE
+//            nonLocImageView.visibility = View.GONE
+//            nonLocTextView.visibility = View.GONE
+//
+//            adapter = ResultsAdapter(requireContext(), data)
+//            recyclerView.adapter = adapter
+//            recyclerView.layoutManager = GridLayoutManager(requireContext(), YelpConstants().maxPopularResults)
+
+
+
             Log.d(TAG, "Before calling getLastLocation()")
             GlobalScope.launch(Dispatchers.IO) { getLastLocation(requireContext()) }
-        } else {
-            recyclerView.visibility = View.GONE
-            progressDialog.visibility = View.GONE
-            nonLocImageView.visibility = View.VISIBLE
-            nonLocTextView.visibility = View.VISIBLE
-        }
+//        } else {
+//            recyclerView.visibility = View.GONE
+//            progressDialog.visibility = View.GONE
+//            nonLocImageView.visibility = View.VISIBLE
+//            nonLocTextView.visibility = View.VISIBLE
+//        }
     }
 
     @SuppressLint("MissingPermission")
@@ -175,6 +208,7 @@ class MainFragment: Fragment() {
     }
 
     private fun getPopularLocations(latitude: Double?, longitude: Double?) {
+        val loading = viewModel.loading.value
         viewModel.getPopularLocations(latitude, longitude)
         viewModel.data.observe(viewLifecycleOwner, {
             if(it.isEmpty()){
@@ -184,9 +218,10 @@ class MainFragment: Fragment() {
                     data.clear()
                 }
                 data.addAll(it)
-                progressDialog.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
-                adapter.notifyDataSetChanged()
+
+//                progressDialog.visibility = View.GONE
+//                recyclerView.visibility = View.VISIBLE
+//                adapter.notifyDataSetChanged()
             }
         })
     }

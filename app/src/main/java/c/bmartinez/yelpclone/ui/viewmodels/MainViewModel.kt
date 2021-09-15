@@ -1,6 +1,7 @@
 package c.bmartinez.yelpclone.ui.viewmodels
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,17 +18,20 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
 
     private val TAG: String = MainViewModel::class.java.name
     val data = MutableLiveData<List<Results>>()
+    var loading = mutableStateOf(false)
 
     //Calls search endpoint to get locations based on the search term
     fun getSearchResults(searchTerm: String, latitude: Double?, longitude: Double?) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
+                loading.value = true
                 val response = yelpRepository.getSearchResults(searchTerm, latitude!!, longitude!!)
                 if(response.body() != null){
                     data.postValue(response.body()!!.restaurants.toList())
                 } else {
                     Log.d(TAG, response.message())
                 }
+                loading.value = false
             } catch(e: Exception) { Log.d(TAG, "Inside searchResults catch: ${e.stackTraceToString()}")}
         }
     }
@@ -36,12 +40,14 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
     fun getPopularLocations(latitude: Double?, longitude: Double?) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                loading.value = true
                 val response = yelpRepository.getPopularLocations(latitude!!, longitude!!)
                 if(response.body() != null){
                     data.postValue(response.body()!!.restaurants.toList())
                 } else {
                     Log.d(TAG, response.message())
                 }
+                loading.value = false
             } catch(e: Exception) { Log.d(TAG,"Inside catch: ${e.stackTraceToString()}") }
         }
     }

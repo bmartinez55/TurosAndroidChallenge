@@ -1,0 +1,387 @@
+﻿;
+; iMDriver.inf
+;
+
+[Version]
+Signature="$Windows NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+CatalogFile="x64\Driver\iMDriver Package\x64_Driver_iMDriver Package_imdriver.cat"
+DriverVer=05/31/2021,1.1.20.1
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceName%=LnvAppFrmDevice_Install, Root\iMDriver
+%DeviceNameV2%=LnvAppFrmDevice_Install, Root\iMDriverV2
+
+
+[SourceDisksFiles]
+
+iMDriver.txt=1
+
+Packages_GenericCorePlugin_x64_GenericCorePlugin.dll=2
+Packages_GenericCorePlugin_x64_Lenovo.Modern.CoreTypes.dll=2
+Packages_GenericCorePlugin_x64_Lenovo.Modern.ImController.ImClient.dll=2
+Packages_GenericCorePlugin_x64_Lenovo.Modern.Utilities.dll=2
+Packages_GenericCorePlugin_x64_Lenovo.ImController.EventLogging.dll=2
+Packages_GenericCorePlugin_x64_SMBiosInformationRetriever.dll=2
+
+Packages_GenericCorePlugin_x86_GenericCorePlugin.dll=3
+Packages_GenericCorePlugin_x86_Lenovo.Modern.CoreTypes.dll=3
+Packages_GenericCorePlugin_x86_Lenovo.Modern.ImController.ImClient.dll=3
+Packages_GenericCorePlugin_x86_Lenovo.Modern.Utilities.dll=3
+Packages_GenericCorePlugin_x86_Lenovo.ImController.EventLogging.dll=3
+Packages_GenericCorePlugin_x86_SMBiosInformationRetriever.dll=3
+
+Packages_GenericCorePlugin_PluginManifest.xml=4
+
+x64_Driver_iMDriver Package_iMDriver.dll=5
+x64_Driver_iMDriver Package_WudfUpdate_01011.dll=5
+
+x64_Driver_iMDriver.dll=6
+x64_Driver_iMDriverHelper.dll=6
+
+x64_ImController_ClientBrokerAgent.Net.dll=7
+x64_ImController_Lenovo.CertificateValidation.dll=7
+x64_ImController_Newtonsoft.Json.dll=7
+x64_ImController_SecureBlackbox.dll=7
+x64_ImController_SecureBlackbox.HTTP.dll=7
+x64_ImController_SecureBlackbox.HTTPCommon.dll=7
+x64_ImController_SecureBlackbox.LDAP.dll=7
+x64_ImController_SecureBlackbox.PGP.dll=7
+x64_ImController_SecureBlackbox.SSLClient.dll=7
+x64_ImController_SecureBlackbox.SSLCommon.dll=7
+x64_ImController_SecureBlackbox.XML.dll=7
+x64_ImController_SecureBlackbox.XMLSecurity.dll=7
+x64_ImController_Lenovo.ImController.EventLogging.dll=7
+x64_ImController_Lenovo.Modern.CoreTypes.dll=7
+x64_ImController_Lenovo.Modern.ImController.ContractBroker.dll=7
+x64_ImController_Lenovo.Modern.ImController.EventManager.dll=7
+x64_ImController_Lenovo.Modern.ImController.exe=7
+x64_ImController_Lenovo.Modern.ImController.ImClient.dll=7
+x64_ImController_Lenovo.Modern.ImController.PluginManager.dll=7
+x64_ImController_Lenovo.Modern.ImController.Shared.dll=7
+x64_ImController_Lenovo.Modern.ImController.UpdateManager.dll=7
+x64_ImController_Lenovo.Modern.Utilities.dll=7
+x64_ImController_Microsoft.Win32.TaskScheduler.dll=7
+x64_ImController_System.Runtime.WindowsRuntime.dll=7
+x64_ImController_Windows.winmd=7
+
+x64_ImController.InfInstaller_ImController.InfInstaller.exe=8
+
+x64_PluginHost_Lenovo.ImController.EventLogging.dll=9
+x64_PluginHost_Lenovo.Modern.CoreTypes.dll=9
+x64_PluginHost_Lenovo.Modern.ImController.ImClient.dll=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.AppDomain.dll=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.CompanionApp.exe=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.Device.exe=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.exe=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.SettingsApp.exe=9
+x64_PluginHost_Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll=9
+x64_PluginHost_Lenovo.Modern.ImController.Shared.dll=9
+x64_PluginHost_Lenovo.Modern.Utilities.dll=9
+x64_PluginHost_System.Runtime.WindowsRuntime.dll=9
+x64_PluginHost_Windows.winmd=9
+
+x86_PluginHost_Lenovo.ImController.EventLogging.dll=10
+x86_PluginHost_Lenovo.Modern.CoreTypes.dll=10
+x86_PluginHost_Lenovo.Modern.ImController.ImClient.dll=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.AppDomain.dll=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.CompanionApp.exe=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.Device.exe=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.exe=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.SettingsApp.exe=10
+x86_PluginHost_Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll=10
+x86_PluginHost_Lenovo.Modern.ImController.Shared.dll=10
+x86_PluginHost_Lenovo.Modern.Utilities.dll=10
+x86_PluginHost_System.Runtime.WindowsRuntime.dll=10
+x86_PluginHost_Windows.winmd=10
+
+;data_ImControllerSubscription.xml=11
+data_ImControllerMaintenanceTask.xml=11
+data_ImControllerMonitorTask.xml=11
+data_ImControllerEventManifest.man=11
+data_NOTICE_IMCService.txt=11
+
+x64_ImController.InfInstaller_ImController.CoInstaller.dll=12
+
+[SourceDisksNames]
+1 = %DiskName%,,,
+2 = %DiskName%,,,"\Packages\GenericCorePlugin\x64"
+3 = %DiskName%,,,"\Packages\GenericCorePlugin\x86"
+4 = %DiskName%,,,"\Packages\GenericCorePlugin"
+5 = %DiskName%,,,"\x64\Driver\iMDriver Package"
+6 = %DiskName%,,,"\x64\Driver"
+7 = %DiskName%,,,"\x64\ImController"
+8 = %DiskName%,,,"\x64\ImController.InfInstaller"
+9 = %DiskName%,,,"\x64\PluginHost"
+10 = %DiskName%,,,"\x86\PluginHost"
+11 = %DiskName%,,,"\Data"
+12 = %DiskName%,,,"\x64\ImController.InfInstaller"
+
+; =================== UMDF Device ==================================
+
+[LnvAppFrmDevice_Install.NT]
+CopyFiles=root, Packages_GenericCorePlugin_x64, Packages_GenericCorePlugin_x86, Packages_GenericCorePlugin, x64_Driver_iMDriver Package, x64_Driver, x64_ImController, x64_ImController.InfInstaller, x64_PluginHost, x86_PluginHost, Data, PluginData, SharedPluginData, SystemPluginData
+;RegisterDlls=MiscInstall.Operations, Folder.Permissions
+AddReg=WUDF_IMC_AddReg
+
+[LnvAppFrmDevice_Install.NT.Interfaces]
+
+AddInterface={8466bd23-0fd3-4ffd-8ecb-2f3dbe34262b},,LnvAppFrmDevice_Interface
+
+[LnvAppFrmDevice_Interface]
+
+AddProperty=LnvAppFrmDevice_Interface_AddProperty
+
+[LnvAppFrmDevice_Interface_AddProperty]
+
+{026e516e-b814-414b-83cd-856d6fef4822},6,0x11,,0 ; non-zero indicates Privileged Interface
+
+[LnvAppFrmDevice_Install.NT.hw]
+
+[LnvAppFrmDevice_Install.NT.Services]
+AddService=WUDFRd,0x000001fa,WUDFRD_ServiceInstall
+AddService=ImControllerService,0x000000f8,IMC_ServiceInstall
+AddService=ImControllerInstallerService,0x000008f8,IMCInstall_ServiceInstall
+
+[LnvAppFrmDevice_Install.NT.CoInstallers]
+CopyFiles=CoInstallers_CopyFiles
+;AddReg=CoInstallers_AddReg, InfInstallReg
+
+[LnvAppFrmDevice_Install.NT.Wdf]
+UmdfService=iMDriver,iMDriver_Install
+UmdfServiceOrder=iMDriver
+UmdfHostProcessSharing=ProcessSharingDisabled
+
+[iMDriver_Install]
+UmdfLibraryVersion=2.00.0 
+ServiceBinary=%12%\UMDF\iMDriver.dll
+
+[WUDFRD_ServiceInstall]
+DisplayName = %WudfRdDisplayName%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\WUDFRd.sys
+LoadOrderGroup = Base
+
+[IMC_ServiceInstall]
+DisplayName=%ImcSvcDisplayName%
+ServiceType = 0x10
+StartType = 2
+ErrorControl = 1
+ServiceBinary = %10%\Lenovo\ImController\Service\Lenovo.Modern.ImController.exe
+Description="The Lenovo System Interface Foundation Service provides interfaces for key features such as: system power management, system optimization, driver and application updates, and system settings to Lenovo applications including Lenovo Companion, Lenovo Settings and Lenovo ID. If you disable this service, Lenovo applications will not work properly."
+
+[IMCInstall_ServiceInstall]
+DisplayName = ImController Installer Service
+ServiceType = 0x10
+StartType = 2
+ErrorControl = 1
+ServiceBinary = %11%\ImController.InfInstaller.exe
+Description = ImController Installer Service
+
+[WUDF_IMC_AddReg]
+HKR,,CoInstallers32,0x00010000,"WUDFCoinstaller.dll","WudfUpdate_02000.dll";,"ImController.CoInstaller.dll"
+
+;[InfInstallReg]
+;HKLM,SOFTWARE\Lenovo\ImController,"InfInstaller",,1
+;HKLM,SOFTWARE\WOW6432Node\Lenovo\ImController,"InfInstaller",,1
+;HKLM,SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Lenovo Dependency Package_is1,"UnInstallString",,""""%16422%\Lenovo\ImController\Service\Lenovo.Modern.ImController.exe""""
+
+;[MiscInstall.Operations]
+;11,,wevtutil.exe,,,"IM """%16419%\Lenovo\ImController\ImControllerEventManifest.man""""
+;11,,schtasks.exe,,,"/create /xml """%16419%\Lenovo\ImController\ImControllerMaintenanceTask.xml""" /tn """Lenovo\ImController\Lenovo iM Controller Scheduled Maintenance""" /f"
+
+;[Folder.Permissions]
+;11,,takeown.exe,,,"/F """%16419%\Lenovo\ImController\*.xml""""
+;11,,takeown.exe,,,"/F """%16419%\Lenovo\ImController\Shared""" /R /D Y"
+;11,,takeown.exe,,,"/F """%16419%\Lenovo\ImController\SystemPluginData""" /R /D Y"
+;11,,takeown.exe,,,"/F """%16419%\Lenovo\ImController\Plugins""" /R /D Y"
+;Set permissions on ImController to inherited User:Read-only, Admin:ReadWrite, System:ReadWrite and remove permissions we've inherited from our parent
+;11,,icacls.exe,,,""""%16419%\Lenovo\ImController""" /inheritance:r /q /grant *S-1-5-32-545:(OI)(CI)RX *S-1-5-32-544:(OI)(CI)F *S-1-5-18:(OI)(CI)F"
+;Enable inheritance on all children (this MAY be unnecessary if /reset does this for us)
+;11,,icacls.exe,,,""""%16419%\Lenovo\ImController\*""" /q /c /t /inheritance:e"
+;Reset permissions on all children
+;11,,icacls.exe,,,""""%16419%\Lenovo\ImController\*""" /q /c /t /reset"
+;Change permissions on PluginData to add User:ReadWrite
+
+;11,,icacls.exe,,,""""%16419%\Lenovo\ImController\PluginData""" /q /grant *S-1-5-32-545:(OI)(CI)F"
+;Change permissions on SharedPluginData to add User:ReadWrite
+
+;11,,icacls.exe,,,""""%16419%\Lenovo\ImController\SharedPluginData""" /q /grant *S-1-5-32-545:(OI)(CI)F"
+;Create SystemPluginData dir - it will inherit from IMC main
+
+
+
+;[DefaultUnInstall]
+;DelFiles=Packages_GenericCorePlugin_x64, Packages_GenericCorePlugin_x86, Packages_GenericCorePlugin, x64_Driver_iMDriver Package, x64_Driver, x64_ImController, x64_ImController.InfInstaller, x64_PluginHost, x86_PluginHost
+;DelReg=InfInstallReg
+;UnregisterDlls=MiscUninstall.Operations, Folder.Permissions
+
+;[DefaultUnInstall.Services]
+;DelService = ImControllerService,0x00000204
+
+;[MiscUninstall.Operations]
+;11,,schtasks.exe,,,"/delete /tn """Lenovo\ImController\Lenovo iM Controller Scheduled Maintenance""" /f"
+
+[DestinationDirs]
+x64_Driver_iMDriver Package=12,UMDF ; copy to drivers\umdf
+CoInstallers_CopyFiles=11
+x64_Driver=11
+x64_ImController=10, Lenovo\ImController\Service
+x64_PluginHost=10, Lenovo\ImController\PluginHost
+x86_PluginHost=10, Lenovo\ImController\PluginHost86
+Packages_GenericCorePlugin=10, Lenovo\ImController\Plugins\GenericCorePlugin
+Packages_GenericCorePlugin_x64=10, Lenovo\ImController\Plugins\GenericCorePlugin\x64
+Packages_GenericCorePlugin_x86=10, Lenovo\ImController\Plugins\GenericCorePlugin\x86
+root=11
+x64_ImController.InfInstaller=11
+Data=10, Lenovo\ImController\Data
+PluginData=10, Lenovo\ImController\PluginData
+SharedPluginData=10, Lenovo\ImController\SharedPluginData
+SystemPluginData=10, Lenovo\ImController\SystemPluginData
+
+[root]
+iMDriver.inf,imdriver.txt,,
+
+[Packages_GenericCorePlugin_x64]
+GenericCorePlugin.dll,Packages_GenericCorePlugin_x64_GenericCorePlugin.dll,,
+Lenovo.ImController.EventLogging.dll,Packages_GenericCorePlugin_x64_Lenovo.ImController.EventLogging.dll,,
+Lenovo.Modern.CoreTypes.dll,Packages_GenericCorePlugin_x64_Lenovo.Modern.CoreTypes.dll,,
+Lenovo.Modern.ImController.ImClient.dll,Packages_GenericCorePlugin_x64_Lenovo.Modern.ImController.ImClient.dll,,
+Lenovo.Modern.Utilities.dll,Packages_GenericCorePlugin_x64_Lenovo.Modern.Utilities.dll,,
+SMBiosInformationRetriever.dll,Packages_GenericCorePlugin_x64_SMBiosInformationRetriever.dll,,
+
+[Packages_GenericCorePlugin_x86]
+GenericCorePlugin.dll,Packages_GenericCorePlugin_x86_GenericCorePlugin.dll,,
+Lenovo.ImController.EventLogging.dll,Packages_GenericCorePlugin_x86_Lenovo.ImController.EventLogging.dll,,
+Lenovo.Modern.CoreTypes.dll,Packages_GenericCorePlugin_x86_Lenovo.Modern.CoreTypes.dll,,
+Lenovo.Modern.ImController.ImClient.dll,Packages_GenericCorePlugin_x86_Lenovo.Modern.ImController.ImClient.dll,,
+Lenovo.Modern.Utilities.dll,Packages_GenericCorePlugin_x86_Lenovo.Modern.Utilities.dll,,
+SMBiosInformationRetriever.dll,Packages_GenericCorePlugin_x86_SMBiosInformationRetriever.dll,,
+
+[Packages_GenericCorePlugin]
+PluginManifest.xml,Packages_GenericCorePlugin_PluginManifest.xml,,
+
+[x64_Driver_iMDriver Package]
+iMDriver.dll,x64_Driver_iMDriver Package_iMDriver.dll,,
+
+[CoInstallers_CopyFiles]
+;WudfUpdate_01011.dll,x64_Driver_iMDriver Package_WudfUpdate_01011.dll,,
+WudfUpdate_02000.dll,x64_ImController.InfInstaller_ImController.CoInstaller.dll,,
+
+[x64_Driver]
+iMDriverHelper.dll,x64_Driver_iMDriverHelper.dll,,
+
+[x64_ImController]
+ClientBrokerAgent.Net.dll,x64_ImController_ClientBrokerAgent.Net.dll,,
+Lenovo.CertificateValidation.dll,x64_ImController_Lenovo.CertificateValidation.dll,,
+Newtonsoft.Json.dll,x64_ImController_Newtonsoft.Json.dll,,
+SecureBlackbox.dll,x64_ImController_SecureBlackbox.dll,,
+SecureBlackbox.HTTP.dll,x64_ImController_SecureBlackbox.HTTP.dll,,
+SecureBlackbox.HTTPCommon.dll,x64_ImController_SecureBlackbox.HTTPCommon.dll,,
+SecureBlackbox.LDAP.dll,x64_ImController_SecureBlackbox.LDAP.dll,,
+SecureBlackbox.PGP.dll,x64_ImController_SecureBlackbox.PGP.dll,,
+SecureBlackbox.SSLClient.dll,x64_ImController_SecureBlackbox.SSLClient.dll,,
+SecureBlackbox.SSLCommon.dll,x64_ImController_SecureBlackbox.SSLCommon.dll,,
+SecureBlackbox.XML.dll,x64_ImController_SecureBlackbox.XML.dll,,
+SecureBlackbox.XMLSecurity.dll,x64_ImController_SecureBlackbox.XMLSecurity.dll,,
+Lenovo.ImController.EventLogging.dll,x64_ImController_Lenovo.ImController.EventLogging.dll,,
+Lenovo.Modern.CoreTypes.dll,x64_ImController_Lenovo.Modern.CoreTypes.dll,,
+Lenovo.Modern.ImController.ContractBroker.dll,x64_ImController_Lenovo.Modern.ImController.ContractBroker.dll,,
+Lenovo.Modern.ImController.EventManager.dll,x64_ImController_Lenovo.Modern.ImController.EventManager.dll,,
+Lenovo.Modern.ImController.exe,x64_ImController_Lenovo.Modern.ImController.exe,,
+Lenovo.Modern.ImController.ImClient.dll,x64_ImController_Lenovo.Modern.ImController.ImClient.dll,,
+Lenovo.Modern.ImController.PluginManager.dll,x64_ImController_Lenovo.Modern.ImController.PluginManager.dll,,
+Lenovo.Modern.ImController.Shared.dll,x64_ImController_Lenovo.Modern.ImController.Shared.dll,,
+Lenovo.Modern.ImController.UpdateManager.dll,x64_ImController_Lenovo.Modern.ImController.UpdateManager.dll,,
+Lenovo.Modern.Utilities.dll,x64_ImController_Lenovo.Modern.Utilities.dll,,
+Microsoft.Win32.TaskScheduler.dll,x64_ImController_Microsoft.Win32.TaskScheduler.dll,,
+System.Runtime.WindowsRuntime.dll,x64_ImController_System.Runtime.WindowsRuntime.dll,,
+Windows.winmd,x64_ImController_Windows.winmd,,
+
+
+[x64_ImController.InfInstaller]
+ImController.InfInstaller.exe,x64_ImController.InfInstaller_ImController.InfInstaller.exe,,
+
+[x64_PluginHost]
+Lenovo.CertificateValidation.dll,x64_ImController_Lenovo.CertificateValidation.dll,,
+Newtonsoft.Json.dll,x64_ImController_Newtonsoft.Json.dll,,
+SecureBlackbox.dll,x64_ImController_SecureBlackbox.dll,,
+SecureBlackbox.HTTP.dll,x64_ImController_SecureBlackbox.HTTP.dll,,
+SecureBlackbox.HTTPCommon.dll,x64_ImController_SecureBlackbox.HTTPCommon.dll,,
+SecureBlackbox.LDAP.dll,x64_ImController_SecureBlackbox.LDAP.dll,,
+SecureBlackbox.PGP.dll,x64_ImController_SecureBlackbox.PGP.dll,,
+SecureBlackbox.SSLClient.dll,x64_ImController_SecureBlackbox.SSLClient.dll,,
+SecureBlackbox.SSLCommon.dll,x64_ImController_SecureBlackbox.SSLCommon.dll,,
+SecureBlackbox.XML.dll,x64_ImController_SecureBlackbox.XML.dll,,
+SecureBlackbox.XMLSecurity.dll,x64_ImController_SecureBlackbox.XMLSecurity.dll,,
+Lenovo.ImController.EventLogging.dll,x64_PluginHost_Lenovo.ImController.EventLogging.dll,,
+Lenovo.Modern.CoreTypes.dll,x64_PluginHost_Lenovo.Modern.CoreTypes.dll,,
+Lenovo.Modern.ImController.ImClient.dll,x64_PluginHost_Lenovo.Modern.ImController.ImClient.dll,,
+Lenovo.Modern.ImController.PluginHost.AppDomain.dll,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.AppDomain.dll,,
+Lenovo.Modern.ImController.PluginHost.CompanionApp.exe,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.CompanionApp.exe,,
+Lenovo.Modern.ImController.PluginHost.Device.exe,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.Device.exe,,
+Lenovo.Modern.ImController.PluginHost.exe,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.exe,,
+Lenovo.Modern.ImController.PluginHost.SettingsApp.exe,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.SettingsApp.exe,,
+Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll,x64_PluginHost_Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll,,
+Lenovo.Modern.ImController.Shared.dll,x64_PluginHost_Lenovo.Modern.ImController.Shared.dll,,
+Lenovo.Modern.Utilities.dll,x64_PluginHost_Lenovo.Modern.Utilities.dll,,
+System.Runtime.WindowsRuntime.dll,x64_PluginHost_System.Runtime.WindowsRuntime.dll,,
+Windows.winmd,x64_PluginHost_Windows.winmd,,
+
+
+[x86_PluginHost]
+Lenovo.CertificateValidation.dll,x64_ImController_Lenovo.CertificateValidation.dll,,
+Newtonsoft.Json.dll,x64_ImController_Newtonsoft.Json.dll,,
+SecureBlackbox.dll,x64_ImController_SecureBlackbox.dll,,
+SecureBlackbox.HTTP.dll,x64_ImController_SecureBlackbox.HTTP.dll,,
+SecureBlackbox.HTTPCommon.dll,x64_ImController_SecureBlackbox.HTTPCommon.dll,,
+SecureBlackbox.LDAP.dll,x64_ImController_SecureBlackbox.LDAP.dll,,
+SecureBlackbox.PGP.dll,x64_ImController_SecureBlackbox.PGP.dll,,
+SecureBlackbox.SSLClient.dll,x64_ImController_SecureBlackbox.SSLClient.dll,,
+SecureBlackbox.SSLCommon.dll,x64_ImController_SecureBlackbox.SSLCommon.dll,,
+SecureBlackbox.XML.dll,x64_ImController_SecureBlackbox.XML.dll,,
+SecureBlackbox.XMLSecurity.dll,x64_ImController_SecureBlackbox.XMLSecurity.dll,,
+Lenovo.ImController.EventLogging.dll,x86_PluginHost_Lenovo.ImController.EventLogging.dll,,
+Lenovo.Modern.CoreTypes.dll,x86_PluginHost_Lenovo.Modern.CoreTypes.dll,,
+Lenovo.Modern.ImController.ImClient.dll,x86_PluginHost_Lenovo.Modern.ImController.ImClient.dll,,
+Lenovo.Modern.ImController.PluginHost.AppDomain.dll,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.AppDomain.dll,,
+Lenovo.Modern.ImController.PluginHost.CompanionApp.exe,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.CompanionApp.exe,,
+Lenovo.Modern.ImController.PluginHost.Device.exe,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.Device.exe,,
+Lenovo.Modern.ImController.PluginHost.exe,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.exe,,
+Lenovo.Modern.ImController.PluginHost.SettingsApp.exe,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.SettingsApp.exe,,
+Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll,x86_PluginHost_Lenovo.Modern.ImController.PluginHost.UnmanagedPluginShim.dll,,
+Lenovo.Modern.ImController.Shared.dll,x86_PluginHost_Lenovo.Modern.ImController.Shared.dll,,
+Lenovo.Modern.Utilities.dll,x86_PluginHost_Lenovo.Modern.Utilities.dll,,
+System.Runtime.WindowsRuntime.dll,x86_PluginHost_System.Runtime.WindowsRuntime.dll,,
+Windows.winmd,x86_PluginHost_Windows.winmd,,
+
+
+[Data]
+;ImControllerSubscription.xml,data_ImControllerSubscription.xml,,
+ImControllerMaintenanceTask.xml,data_ImControllerMaintenanceTask.xml,,
+ImControllerMonitorTask.xml,data_ImControllerMonitorTask.xml,,
+ImControllerEventManifest.man,data_ImControllerEventManifest.man,,
+NOTICE_IMCService.txt,data_NOTICE_IMCService.txt,,
+
+[PluginData]
+
+[SharedPluginData]
+
+[SystemPluginData]
+
+; =================== Generic ==================================
+
+[Strings]
+ManufacturerName="Lenovo" 
+DiskName = "Lenovo SIFT Driver Installation Disk"
+WudfRdDisplayName="Windows Driver Foundation - User-mode Driver Framework Reflector"
+ImcSvcDisplayName="System Interface Foundation Service"
+DeviceName="System Interface Foundation Device"
+DeviceNameV2="System Interface Foundation V2 Device"

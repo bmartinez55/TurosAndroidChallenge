@@ -1,0 +1,145 @@
+; Copyright (C) 2011-2013 Anchorfree, Inc.
+
+[Version]
+   Signature = "$Windows NT$"
+   CatalogFile = taphss6.cat
+   ClassGUID = {4d36e972-e325-11ce-bfc1-08002be10318}
+   Provider = %Provider%
+   Class = Net
+
+; This version number should match the version
+; number given in SOURCES.
+   DriverVer=12/27/2012,32.00.00.3
+
+[Strings]
+   DeviceDescription = "Anchorfree HSS VPN Adapter"
+   Provider = "Anchorfree HSS VPN Adapter"
+
+;----------------------------------------------------------------
+;                      Manufacturer + Product Section (Done)
+;----------------------------------------------------------------
+[Manufacturer]
+   %Provider% = taphss6, NTamd64
+
+[taphss6.NTamd64]
+   %DeviceDescription% = taphss6.ndi, taphss6
+
+;---------------------------------------------------------------
+;                             Driver Section (Done)
+;---------------------------------------------------------------
+
+;----------------- Characteristics ------------
+;    NCF_PHYSICAL = 0x04
+;    NCF_VIRTUAL = 0x01
+;    NCF_SOFTWARE_ENUMERATED = 0x02
+;    NCF_HIDDEN = 0x08
+;    NCF_NO_SERVICE = 0x10
+;    NCF_HAS_UI = 0x80
+;----------------- Characteristics ------------
+
+[taphss6.ndi]
+   CopyFiles       = taphss6.driver, taphss6.files
+   AddReg          = taphss6.reg
+   AddReg          = taphss6.params.reg
+   Characteristics = 0x81
+   *IfType            = 0x6 ; IF_TYPE_ETHERNET_CSMACD
+   *MediaType         = 0x0 ; NdisMedium802_3
+   *PhysicalMediaType = 14  ; NdisPhysicalMedium802_3
+
+
+[taphss6.ndi.Services]
+   AddService = taphss6,2, taphss6.service
+
+[taphss6.reg]
+   HKR, Ndi,            Service,      0, "taphss6"
+   HKR, Ndi\Interfaces, UpperRange,   0, "ndis5"
+   HKR, Ndi\Interfaces, LowerRange,   0, "ethernet"
+   HKR, ,               Manufacturer, 0, "%Provider%"
+   HKR, ,               ProductName,  0, "%DeviceDescription%"
+
+[taphss6.params.reg]
+   HKR, Ndi\params\MTU,                  ParamDesc, 0, "MTU"
+   HKR, Ndi\params\MTU,                  Type,      0, "int"
+   HKR, Ndi\params\MTU,                  Default,   0, "1500"
+   HKR, Ndi\params\MTU,                  Optional,  0, "0"
+   HKR, Ndi\params\MTU,                  Min,       0, "100"
+   HKR, Ndi\params\MTU,                  Max,       0, "1500"
+   HKR, Ndi\params\MTU,                  Step,      0, "1"
+   HKR, Ndi\params\MediaStatus,          ParamDesc, 0, "Media Status"
+   HKR, Ndi\params\MediaStatus,          Type,      0, "enum"
+   HKR, Ndi\params\MediaStatus,          Default,   0, "0"
+   HKR, Ndi\params\MediaStatus,          Optional,  0, "0"
+   HKR, Ndi\params\MediaStatus\enum,     "0",       0, "Application Controlled"
+   HKR, Ndi\params\MediaStatus\enum,     "1",       0, "Always Connected"
+   HKR, Ndi\params\MAC,                  ParamDesc, 0, "MAC Address"
+   HKR, Ndi\params\MAC,                  Type,      0, "edit"
+   HKR, Ndi\params\MAC,                  Optional,  0, "1"
+   HKR, Ndi\params\AllowNonAdmin,        ParamDesc, 0, "Non-Admin Access"
+   HKR, Ndi\params\AllowNonAdmin,        Type,      0, "enum"
+   HKR, Ndi\params\AllowNonAdmin,        Default,   0, "1"
+   HKR, Ndi\params\AllowNonAdmin,        Optional,  0, "0"
+   HKR, Ndi\params\AllowNonAdmin\enum,   "0",       0, "Not Allowed"
+   HKR, Ndi\params\AllowNonAdmin\enum,   "1",       0, "Allowed"
+
+;----------------------------------------------------------------
+;                             Service Section
+;----------------------------------------------------------------
+
+;---------- Service Type -------------
+;    SERVICE_KERNEL_DRIVER     = 0x01
+;    SERVICE_WIN32_OWN_PROCESS = 0x10
+;---------- Service Type -------------
+
+;---------- Start Mode ---------------
+;    SERVICE_BOOT_START   = 0x0
+;    SERVICE_SYSTEM_START = 0x1
+;    SERVICE_AUTO_START   = 0x2
+;    SERVICE_DEMAND_START = 0x3
+;    SERVICE_DISABLED     = 0x4
+;---------- Start Mode ---------------
+
+[taphss6.service]
+   DisplayName = %DeviceDescription%
+   ServiceType = 1
+   StartType = 3
+   ErrorControl = 1
+   LoadOrderGroup = NDIS
+   ServiceBinary = %12%\taphss6.sys
+
+;-----------------------------------------------------------------
+;                                File Installation
+;-----------------------------------------------------------------
+
+;----------------- Copy Flags ------------
+;    COPYFLG_NOSKIP = 0x02
+;    COPYFLG_NOVERSIONCHECK = 0x04
+;----------------- Copy Flags ------------
+
+; SourceDisksNames
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+; 1 = "Intel Driver Disk 1",e100bex.sys,,
+
+[SourceDisksNames]
+   1 = %DeviceDescription%, taphss6.sys
+
+; SourceDisksFiles
+; filename_on_source = diskID[, [subdir][, size]]
+; e100bex.sys = 1,, ; on distribution disk 1
+
+[SourceDisksFiles]
+taphss6.sys = 1
+
+[DestinationDirs]
+   taphss6.files  = 11
+   taphss6.driver = 12
+
+[taphss6.files]
+;   TapPanel.cpl,,,6   ; COPYFLG_NOSKIP | COPYFLG_NOVERSIONCHECK
+;   cipsrvr.exe,,,6     ; COPYFLG_NOSKIP | COPYFLG_NOVERSIONCHECK
+
+[taphss6.driver]
+   taphss6.sys,,,6     ; COPYFLG_NOSKIP | COPYFLG_NOVERSIONCHECK
+
+;---------------------------------------------------------------
+;                                      End
+;---------------------------------------------------------------
