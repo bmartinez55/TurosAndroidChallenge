@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF0000")))
 
-        val mainFragment = MainFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_frag_container, mainFragment).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frag_container, MainFragment()).commit()
     }
 
 }

@@ -1,6 +1,7 @@
 package c.bmartinez.yelpclone.ui.viewmodels
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,9 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
 
     private val TAG: String = MainViewModel::class.java.name
     val data = MutableLiveData<List<Results>>()
+    val popularLocationResults: MutableState<List<Results>> = mutableStateOf(listOf())
     var loading = mutableStateOf(false)
+    val searchTermQuery = mutableStateOf("")
 
     //Calls search endpoint to get locations based on the search term
     fun getSearchResults(searchTerm: String, latitude: Double?, longitude: Double?) {
@@ -32,7 +35,10 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                     Log.d(TAG, response.message())
                 }
                 loading.value = false
-            } catch(e: Exception) { Log.d(TAG, "Inside searchResults catch: ${e.stackTraceToString()}")}
+            } catch(e: Exception) {
+                loading.value = false
+                Log.d(TAG, "Inside searchResults catch: ${e.stackTraceToString()}")
+            }
         }
     }
 
@@ -44,11 +50,15 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                 val response = yelpRepository.getPopularLocations(latitude!!, longitude!!)
                 if(response.body() != null){
                     data.postValue(response.body()!!.restaurants.toList())
+                    popularLocationResults.value = response.body()!!.restaurants
                 } else {
                     Log.d(TAG, response.message())
                 }
                 loading.value = false
-            } catch(e: Exception) { Log.d(TAG,"Inside catch: ${e.stackTraceToString()}") }
+            } catch(e: Exception) {
+                loading.value = false
+                Log.d(TAG,"Inside catch: ${e.stackTraceToString()}")
+            }
         }
     }
 
@@ -71,4 +81,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
 //        }
 //    }
 
+    fun onSearchTermChanged(newTerm: String) {
+        this.searchTermQuery.value = newTerm
+    }
 }

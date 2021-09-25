@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/bcast/Desktop/TurosAndroidChallenge/app/src/main/res/layout-v11/item_layout.xml" value="0.1" />
         <entry key="..\:/Users/bcast/Desktop/TurosAndroidChallenge/app/src/main/res/layout/activity_splash_screen.xml" value="0.10866261398176291" />
         <entry key="..\:/Users/bcast/Desktop/TurosAndroidChallenge/app/src/main/res/layout/item_layout.xml" value="0.125" />
         <entry key="..\:/Users/bcast/Desktop/TurosAndroidChallenge/app/src/main/res/layout/main_frag_layout.xml" value="0.2558876811594203" />
+        <entry key="..\:/Users/bcast/Desktop/TurosAndroidChallenge/app/src/main/res/menu/main_menu.xml" value="0.1787037037037037" />
       </map>
     </option>
   </component>
