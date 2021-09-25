@@ -12,7 +12,11 @@ data class Results(
     @SerializedName("display_phone") val phone: String,
     @SerializedName("image_url") val image_url: String,
     @SerializedName("distance") val distance: Double,
-    @SerializedName("location") val location: ResultsLocation
+    @SerializedName("location") val location: ResultsLocation,
+    @SerializedName("review_count") val review_count: Int,
+    @SerializedName("rating") val rating: Double,
+    @SerializedName("price") val price: String,
+    @SerializedName("categories") val categories: List<ResultsCategories>
 )
 
 data class ResultsLocation(
@@ -20,4 +24,8 @@ data class ResultsLocation(
     @SerializedName("city") val city: String,
     @SerializedName("state") val state: String,
     @SerializedName("zip_code") val zipCode: String
+)
+
+data class ResultsCategories(
+    @SerializedName("title") val title: String
 )

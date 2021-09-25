@@ -1,0 +1,119 @@
+;
+;    LenovoVhid.INF
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=LenovoVhid
+ClassGuid={177B1D2A-679C-4093-98BF-FD6999695D3B}
+Provider=Lenovo
+DriverVer=07/25/2013,10.30.0.288
+CatalogFile=LenovoVhid.cat
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=LenovoVhidClassReg     
+
+[LenovoVhidClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+; ================= Device section =====================
+
+[Manufacturer]
+%MfgName%=Lenovo, NTamd64.6.2
+
+; For Win8 and later so we can use inbox HID-UMDF mapper
+[Lenovo.NTamd64.6.2]
+%DeviceDesc%=LenovoVhid.win8, root\LenovoVhid
+
+;===============================================================
+;   vhidmini for win8 and newer (uses inbox HID-UMDF mapper)
+;===============================================================
+[LenovoVhid.win8.NT]
+CopyFiles=UMDriverCopy
+
+[LenovoVhid.win8.NT.hw]
+AddReg=LenovoVhid_AddReg
+
+[LenovoVhid.win8.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[LenovoVhid.win8.NT.Services]
+AddService=WUDFRd,0x000001f8,WUDFRD_ServiceInstall  
+AddService=mshidumdf, 0x000001fa, mshidumdf.AddService ;flag 0x2 sets this as the service for the device
+
+[mshidumdf.AddService]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\mshidumdf.sys
+
+[LenovoVhid.win8.NT.Wdf]
+UmdfService="LenovoVhid", LenovoVhid_Install
+UmdfServiceOrder=LenovoVhid
+UmdfKernelModeClientPolicy=AllowKernelModeClients
+UmdfFileObjectPolicy=AllowNullAndUnknownFileObjects
+UmdfMethodNeitherAction=Copy
+
+; ================= common section =====================
+
+[LenovoVhid_AddReg]
+HKR,,"LowerFilters",0x00010008,"WUDFRd" ; FLG_ADDREG_TYPE_MULTI_SZ | FLG_ADDREG_APPEND
+
+[WUDFRD_ServiceInstall]
+DisplayName = %WudfRdDisplayName%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\WUDFRd.sys
+LoadOrderGroup = Base
+
+[LenovoVhid_Install]
+UmdfLibraryVersion=1.11.0
+DriverCLSID = "{0000B3E9-ED5A-4EB2-A94F-244AF63B42D2}"
+ServiceBinary = "%12%\UMDF\LenovoVhid.dll"
+
+; ================= copy files =====================
+
+[LenovoVhid.Files.Ext]
+LenovoVhid.sys
+
+[UMDriverCopy]
+LenovoVhid.dll
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+LenovoVhid.sys = 1
+LenovoVhid.dll=1
+WudfUpdate_01011.dll=1
+
+[DestinationDirs]
+UMDriverCopy=12,UMDF ; copy to drivers\umdf
+DefaultDestDir = 12
+
+; ================= WDF Coinstaller installation =====================
+
+[DestinationDirs]
+CoInstaller_CopyFiles = 11
+
+[CoInstaller_CopyFiles]
+WudfUpdate_01011.dll
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000,"WudfUpdate_01011.dll"
+
+;---------------------------------------------------------------;
+
+[Strings]
+MSFT="Lenovo"
+MfgName="Lenovo"
+Disk_Description="LenovoVhid Installation Disk"
+DeviceDesc="UMDF HID minidriver Device"
+hidumdf.SvcDesc="Service for LenovoVhid Device"
+ClassName       = "Lenovo Vhid Device"
+WudfRdDisplayName="Windows Driver Foundation - User-mode Driver Framework Reflector"
