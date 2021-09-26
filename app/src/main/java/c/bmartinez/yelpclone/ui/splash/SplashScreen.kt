@@ -17,7 +17,9 @@ import c.bmartinez.yelpclone.ui.views.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
 import c.bmartinez.yelpclone.utils.YelpConstants
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -33,9 +35,8 @@ class SplashScreen: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SplashComposeComponents().splashParentLayout()
+            SplashParentLayout()
         }
-        //setContentView(R.layout.activity_splash_screen)
         Log.d(TAG, "Inside onCreate()")
 
     }
@@ -45,7 +46,7 @@ class SplashScreen: AppCompatActivity() {
         Log.d(TAG, "Inside onResume()")
 
         Handler(Looper.getMainLooper()).postDelayed({
-            GlobalScope.launch(Dispatchers.IO) { checkLocationPermissions() }
+            CoroutineScope(IO).launch { checkLocationPermissions() }
         }, 5000)
     }
 
