@@ -111,7 +111,7 @@ class MainFragment: Fragment() {
     @Composable
     fun PreviewToolBar() {
         ToolBarMain(query = mutableStateOf(""), keyboard = LocalFocusManager.current)
-        MainFragComposeComponents().PopularLocationsRecyclerView(popularLocations = data)
+        PopularLocationsRecyclerView(popularLocations = data)
     }
 
     @Composable
