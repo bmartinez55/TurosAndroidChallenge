@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.splash
+package c.bmartinez.yelpclone.ui.views.splash
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image

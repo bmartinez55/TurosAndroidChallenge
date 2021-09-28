@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".ui.splash.SplashScreen"
+            android:name="c.bmartinez.yelpclone.ui.views.splash.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

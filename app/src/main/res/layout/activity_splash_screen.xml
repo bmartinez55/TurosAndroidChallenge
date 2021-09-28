@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.splash.SplashScreen"
+    tools:context=".ui.views.splash.SplashScreen"
     style="@style/Theme.AppCompat.Light.NoActionBar">
 
     <androidx.appcompat.widget.AppCompatImageView

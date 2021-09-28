@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views
+package c.bmartinez.yelpclone.ui.views.mainfragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -34,10 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import c.bmartinez.yelpclone.R
-import c.bmartinez.yelpclone.data.repo.YelpRepository
-import c.bmartinez.yelpclone.data.services.RetrofitService
-import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
-import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
+import c.bmartinez.yelpclone.network.repository.YelpRepository
+import c.bmartinez.yelpclone.network.services.RetrofitService
+import c.bmartinez.yelpclone.data.viewmodels.MainViewModel
+import c.bmartinez.yelpclone.data.viewmodels.MyViewModelFactory
+import c.bmartinez.yelpclone.ui.views.ParentFragRecyclerView
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils

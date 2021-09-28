@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.data.services
+package c.bmartinez.yelpclone.network.services
 
 import c.bmartinez.yelpclone.data.model.*
 import c.bmartinez.yelpclone.utils.api_key

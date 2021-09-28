@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import c.bmartinez.yelpclone.R
+import c.bmartinez.yelpclone.ui.views.mainfragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
