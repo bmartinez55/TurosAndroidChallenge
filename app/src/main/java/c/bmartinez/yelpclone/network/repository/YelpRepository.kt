@@ -1,6 +1,6 @@
-package c.bmartinez.yelpclone.data.repo
+package c.bmartinez.yelpclone.network.repository
 
-import c.bmartinez.yelpclone.data.services.RetrofitService
+import c.bmartinez.yelpclone.network.services.RetrofitService
 import c.bmartinez.yelpclone.utils.maxListResults
 import c.bmartinez.yelpclone.utils.maxPopularResults
 import c.bmartinez.yelpclone.utils.searchNewRadius

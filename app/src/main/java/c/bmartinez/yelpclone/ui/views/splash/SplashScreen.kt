@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.splash
+package c.bmartinez.yelpclone.ui.views.splash
 
 import android.content.Intent
 import android.content.pm.PackageManager

@@ -1,16 +1,13 @@
-package c.bmartinez.yelpclone.ui.viewmodels
+package c.bmartinez.yelpclone.data.viewmodels
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import c.bmartinez.yelpclone.data.model.*
-import c.bmartinez.yelpclone.data.repo.YelpRepository
-import com.google.gson.Gson
+import c.bmartinez.yelpclone.network.repository.YelpRepository
 import kotlinx.coroutines.*
-import org.json.JSONObject
 
 /*
     Primary viewmodel that connects the model and the view. Calls both pizza and beer endpoints with coroutines

@@ -1,8 +1,8 @@
-package c.bmartinez.yelpclone.ui.viewmodels
+package c.bmartinez.yelpclone.data.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import c.bmartinez.yelpclone.data.repo.YelpRepository
+import c.bmartinez.yelpclone.network.repository.YelpRepository
 import java.lang.IllegalArgumentException
 
 /*
