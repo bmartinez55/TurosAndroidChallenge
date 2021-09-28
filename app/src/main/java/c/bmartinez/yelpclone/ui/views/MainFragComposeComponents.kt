@@ -48,7 +48,7 @@ fun MainFragProgressDialog(isDisplayed: Boolean) {
 //Parent Recycler View that holds nested Recycler Views
 @ExperimentalFoundationApi
 @Composable
-fun ParentFragRecyclerView(popularLocations: List<Results>?) {
+fun ParentFragRecyclerView(popularLocations: List<Results>) {
     LazyColumn(
         contentPadding = PaddingValues(start = 10.dp)
     ){
@@ -71,7 +71,7 @@ fun ParentFragRecyclerView(popularLocations: List<Results>?) {
 }
 
 @Composable
-fun PopularLocationsRecyclerView(popularLocations: List<Results>?) {
+fun PopularLocationsRecyclerView(popularLocations: List<Results>) {
     if(popularLocations == null){
 
     } else {
@@ -111,14 +111,14 @@ fun PopularListItem(popularLocation: Results){
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
-            .width(300.dp)
+            .width(270.dp)
             .padding(start = 0.dp, end = 8.dp, top = 0.dp, bottom = 0.dp)
             .border(width = 0.dp, color = Color.Transparent, shape = RectangleShape)
         ,
         elevation = 0.dp
     ) {
         Column {
-            popularLocation.image_url?.let { url ->
+            popularLocation.image_url.let { url ->
                 val image = LoadPicture(url = url, defaultImage = DEFAULT_BUSINESS_IMAGE).value
                 image?.let { img ->
                     Image(
@@ -131,20 +131,18 @@ fun PopularListItem(popularLocation: Results){
                     )
                 }
             }
-            popularLocation.name?.let { title ->
-                Text(
-                    text = title,
-                    modifier = Modifier
-                        .padding(start = 1.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                        .fillMaxWidth(.5f)
-                        .wrapContentWidth(Alignment.Start),
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                    fontSize = 19.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            popularLocation.rating?.let { rate ->
+            Text(
+                text = popularLocation.name,
+                modifier = Modifier
+                    .padding(start = 1.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
+                    .fillMaxWidth(.5f)
+                    .wrapContentWidth(Alignment.Start),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                fontSize = 19.sp,
+                fontWeight = FontWeight.Bold
+            )
+            popularLocation.rating.let { rate ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -152,61 +150,45 @@ fun PopularListItem(popularLocation: Results){
                     ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    popularLocation.rating?.let {
-                        DisplayStarRating(rating = rate)
-                    }
-                    popularLocation.review_count?.let { reviewCount ->
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 2.dp)
-                                .align(Alignment.CenterVertically)
-                            ,
-                            textAlign = TextAlign.Center,
-                            text = "$reviewCount Reviews",
-                            color = Color.Gray
-                        )
-                    }
+                    DisplayStarRating(rating = rate)
+                    Text(
+                        modifier = Modifier
+                            .padding(start = 2.dp)
+                            .align(Alignment.CenterVertically)
+                        ,
+                        textAlign = TextAlign.Center,
+                        text = "${popularLocation.review_count} Reviews",
+                        color = Color.Gray
+                    )
                 }
             }
-            popularLocation.price?.let { price ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    popularLocation.categories?.let { catList ->
-                        if(price == ""){
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 2.dp)
-                                    .align(Alignment.CenterVertically)
-                                ,
-                                textAlign = TextAlign.Center,
-                                text = catList[0].title,
-                                color = Color.Gray
-                            )
-                        } else {
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 2.dp)
-                                    .align(Alignment.CenterVertically)
-                                ,
-                                textAlign = TextAlign.Center,
-                                text = "$price \u2022 ${catList[0].title}",
-                                color = Color.Gray
-                            )
-                        }
-                    }
-
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if(popularLocation.price.isNullOrBlank()){
+                    Text(
+                        modifier = Modifier
+                            .padding(start = 2.dp)
+                            .align(Alignment.CenterVertically)
+                        ,
+                        textAlign = TextAlign.Center,
+                        text = popularLocation.categories[0].title,
+                        color = Color.Gray
+                    )
+                } else {
+                    Text(
+                        modifier = Modifier
+                            .padding(start = 2.dp)
+                            .align(Alignment.CenterVertically)
+                        ,
+                        textAlign = TextAlign.Center,
+                        text = "${popularLocation.price} \u2022 ${popularLocation.categories[0].title}",
+                        color = Color.Gray
+                    )
                 }
             }
         }
-//            GlideImage(
-//                imageModel = popularLocation.image_url,
-//                contentScale = ContentScale.Inside,
-//                circularReveal = CircularReveal(duration = 250),
-//                placeHolder = ImageBitmap.imageResource(R.drawable.temp_business_icon),
-//                error = ImageBitmap.imageResource(R.drawable.temp_business_icon)
-//            )
     }
 }
 

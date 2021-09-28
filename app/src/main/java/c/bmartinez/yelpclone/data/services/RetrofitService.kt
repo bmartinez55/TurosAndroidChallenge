@@ -1,7 +1,8 @@
 package c.bmartinez.yelpclone.data.services
 
 import c.bmartinez.yelpclone.data.model.*
-import c.bmartinez.yelpclone.utils.YelpConstants
+import c.bmartinez.yelpclone.utils.api_key
+import c.bmartinez.yelpclone.utils.baseURL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -31,16 +32,10 @@ interface RetrofitService {
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,
         @Query("radius") searchRadius: Int,
+        @Query("categories") category: String,
         @Query("sort_by") sortBy: String,
         @Query("limit") maxLimit: Int
     ): Response<YelpSearchResults>
-
-//    @GET("businesses/search")
-//    suspend fun getAllBeerLocations(
-//        @Query("term") searchTerm: String,
-//        @Query("location") location: String,
-//        @Query("radius") searchRadius: Int
-//    ): Response<YelpSearchResults>
 
     companion object {
         var retrofitService: RetrofitService? = null
@@ -54,7 +49,7 @@ interface RetrofitService {
 
                 //Request customization add request headers
                 val requestBuilder = original.newBuilder()
-                    .addHeader("Authorization", "Bearer ${YelpConstants().api_key}")
+                    .addHeader("Authorization", "Bearer ${api_key}")
 
                 val request = requestBuilder.build()
                 chain.proceed(request)
@@ -68,7 +63,7 @@ interface RetrofitService {
 
             if(retrofitService == null){
                 val retrofit = Retrofit.Builder()
-                    .baseUrl(YelpConstants().baseURL)
+                    .baseUrl(baseURL)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
