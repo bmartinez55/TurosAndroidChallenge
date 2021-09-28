@@ -84,15 +84,7 @@ class MainFragment: Fragment() {
         isPermitted = SharedPreferencesUtils.getIntegerPref(requireContext(), SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)!!
 
         if(isPermitted == 1){
-
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-            retrofitService = RetrofitService.getInstance()
-            yelpRepository = YelpRepository(retrofitService)
-            viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
-
-            Log.d(TAG, "Before calling getLastLocation()")
-            CoroutineScope(IO).launch { getLastLocation(requireContext()) }
-            isProgressDisplayed = viewModel.loading.value
+            //isProgressDisplayed = viewModel.loading.value
 
             view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
                 val popularLocations = viewModel.popularLocationResults.value
@@ -110,6 +102,16 @@ class MainFragment: Fragment() {
             }
         }
         return view
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "Inside onViewCreated()")
+        setHasOptionsMenu(true)
+
+        initView(isPermitted)
     }
 
     @Composable
@@ -164,21 +166,13 @@ class MainFragment: Fragment() {
                             backgroundColor = MaterialTheme.colors.surface,
                             cursorColor = Color.Black,
 
-                        ),
+                            ),
                         textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
                     )
                 }
             }
 
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "Inside onViewCreated()")
-        setHasOptionsMenu(true)
-
-        //initView(isPermitted)
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -217,67 +211,9 @@ class MainFragment: Fragment() {
             retrofitService = RetrofitService.getInstance()
             yelpRepository = YelpRepository(retrofitService)
             viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
+
             Log.d(TAG, "Before calling getLastLocation()")
             CoroutineScope(IO).launch { getLastLocation(requireContext()) }
-
-//            isProgressDisplayed = viewModel.loading.value
-//            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
-//                val popularLocations = viewModel.popularLocationResults.value
-//                val searchQueryTerm = remember { mutableStateOf("") }
-//                Column {
-//                    Surface(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        color = MaterialTheme.colors.primary,
-//                        elevation = 8.dp
-//                    ) {
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth()
-//                        ) {
-//                            TextField(
-//                                modifier = Modifier
-//                                    .fillMaxWidth(0.8f)
-//                                    .padding(8.dp),
-//                                value = searchQueryTerm.value,
-//                                onValueChange = { newSearchTerm ->
-//                                    viewModel.onSearchTermChanged(newSearchTerm)
-//                                },
-//                                label = { Text(text = "Search") },
-//                                keyboardOptions = KeyboardOptions(
-//                                    keyboardType = KeyboardType.Text,
-//                                    imeAction = ImeAction.Search
-//                                ),
-//                                leadingIcon = {
-//                                    Icon(Icons.Filled.Search, "")
-//                                },
-//                                onImeActionPerformed = { action, softKeyboardController ->
-////                                    if(action == ImeAction.Search) {
-////                                        viewModel.getSearchResults(searchQueryTerm.value)
-////                                          softKeyboardController?.hideSoftwareKeyboard()
-////                                    }
-//                                },
-//                                textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-//                                backgroundColor = MaterialTheme.colors.surface
-//                            )
-//                        }
-//                    }
-//                }
-
-//                MaterialTheme() {
-//                    Column(
-//                        modifier = Modifier.fillMaxSize()
-//                    ) {
-//                        MainFragComposeComponents().MainFragProgressDialog(isProgressDisplayed)
-//                    }
-//                }
-            //}
-        } else {
-//            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
-//                MaterialTheme() {
-//                    Column(Modifier) {
-//
-//                    }
-//                }
-//            }
         }
     }
 
@@ -291,7 +227,7 @@ class MainFragment: Fragment() {
                             if(location == null){
                                 getNewLocation()
                             } else {
-                                viewModel.getPopularLocations(location.latitude, location.longitude)
+                                CoroutineScope(IO).launch { viewModel.getPopularLocations(location.latitude, location.longitude) }
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.latitude.toFloat())
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.longitude.toFloat())
                             }
@@ -320,7 +256,7 @@ class MainFragment: Fragment() {
         override fun onLocationResult(location: LocationResult) {
             SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.lastLocation.latitude.toFloat())
             SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.lastLocation.longitude.toFloat())
-            viewModel.getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude)
+            CoroutineScope(IO).launch { viewModel.getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude) }
         }
     }
 

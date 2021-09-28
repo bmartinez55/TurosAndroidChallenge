@@ -80,7 +80,7 @@ class SplashScreen: AppCompatActivity() {
                 )
             }
         } else {
-            startMainActivity(true)
+            CoroutineScope(IO).launch { startMainActivity(true) }
         }
     }
 
