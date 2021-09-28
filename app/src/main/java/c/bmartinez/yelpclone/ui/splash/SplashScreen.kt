@@ -1,8 +1,6 @@
 package c.bmartinez.yelpclone.ui.splash
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
@@ -11,16 +9,11 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.ui.views.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
-import c.bmartinez.yelpclone.utils.YelpConstants
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SplashScreen: AppCompatActivity() {

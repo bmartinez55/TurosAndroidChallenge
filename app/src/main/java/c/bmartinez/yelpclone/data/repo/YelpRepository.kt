@@ -1,7 +1,10 @@
 package c.bmartinez.yelpclone.data.repo
 
 import c.bmartinez.yelpclone.data.services.RetrofitService
-import c.bmartinez.yelpclone.utils.YelpConstants
+import c.bmartinez.yelpclone.utils.maxListResults
+import c.bmartinez.yelpclone.utils.maxPopularResults
+import c.bmartinez.yelpclone.utils.searchNewRadius
+import c.bmartinez.yelpclone.utils.searchPopularRadius
 
 /*
     This class holds the endpoint calls with query search data
@@ -12,22 +15,17 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
         searchTerm,
         latitude,
         longitude,
-        YelpConstants().searchRadius,
+        searchNewRadius,
         "distance",
-        YelpConstants().maxListResults
+        maxListResults
     )
 
     suspend fun getPopularLocations(latitude: Double, longitude: Double) = retrofitService.getPopularLocations(
         latitude,
         longitude,
-        YelpConstants().searchRadius,
+        searchPopularRadius,
+        "restaurants",
         "rating",
-        YelpConstants().maxPopularResults
+        maxPopularResults
     )
-
-//    suspend fun getAllBeerLocations() = retrofitService.getAllBeerLocations(
-//        "beer",
-//        YelpConstants().officeAddress,
-//        YelpConstants().searchRadius
-//    )
 }

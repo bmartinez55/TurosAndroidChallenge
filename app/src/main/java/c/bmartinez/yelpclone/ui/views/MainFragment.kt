@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -20,8 +17,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -35,19 +30,16 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import c.bmartinez.yelpclone.R
-import c.bmartinez.yelpclone.data.model.Results
 import c.bmartinez.yelpclone.data.repo.YelpRepository
 import c.bmartinez.yelpclone.data.services.RetrofitService
 import c.bmartinez.yelpclone.ui.viewmodels.MainViewModel
 import c.bmartinez.yelpclone.ui.viewmodels.MyViewModelFactory
 import c.bmartinez.yelpclone.utils.LocationUtils
+import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
 import com.google.android.gms.location.*
 import kotlinx.coroutines.CoroutineScope
@@ -59,12 +51,9 @@ class MainFragment: Fragment() {
 
     private val TAG = MainFragment::class.java.name
     lateinit var viewModel: MainViewModel
-    lateinit var adapter: ResultsAdapter
-    lateinit var recyclerView: RecyclerView
     lateinit var menu: Menu
     private lateinit var retrofitService: RetrofitService
     private lateinit var yelpRepository: YelpRepository
-    var popularLocationData = mutableListOf<Results>()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
@@ -72,10 +61,6 @@ class MainFragment: Fragment() {
     private var isPermitted: Int = 0
 
     private var isProgressDisplayed: Boolean = false
-
-    companion object {
-        const val REQUEST_INTERVAL: Long = 1000 * 60 * 30
-    }
 
     @ExperimentalFoundationApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -247,7 +232,7 @@ class MainFragment: Fragment() {
     private fun getNewLocation() {
         locationRequest = LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = REQUEST_INTERVAL
+        locationRequest.interval = REQUEST_LOCATION_INTERVAL
         locationRequest.fastestInterval = 0
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
