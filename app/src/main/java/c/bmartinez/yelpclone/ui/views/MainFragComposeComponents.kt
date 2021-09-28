@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,7 +47,7 @@ fun MainFragProgressDialog(isDisplayed: Boolean) {
 //Parent Recycler View that holds nested Recycler Views
 @ExperimentalFoundationApi
 @Composable
-fun ParentFragRecyclerView(popularLocations: MutableList<Results>?) {
+fun ParentFragRecyclerView(popularLocations: List<Results>?) {
     LazyColumn(
         contentPadding = PaddingValues(start = 10.dp)
     ){
@@ -68,7 +70,7 @@ fun ParentFragRecyclerView(popularLocations: MutableList<Results>?) {
 }
 
 @Composable
-fun PopularLocationsRecyclerView(popularLocations: MutableList<Results>?) {
+fun PopularLocationsRecyclerView(popularLocations: List<Results>?) {
     if(popularLocations == null){
 
     } else {
@@ -95,8 +97,8 @@ fun PopularLocationsRecyclerView(popularLocations: MutableList<Results>?) {
                 fontWeight = FontWeight.Light
             )
             LazyRow{
-                items(popularLocations) { locations ->
-                    PopularListItem(locations)
+                itemsIndexed(items = popularLocations) { index, popLocation ->
+                    PopularListItem(popularLocation = popLocation)
                 }
             }
         }
@@ -125,8 +127,10 @@ fun PopularListItem(popularLocation: Results){
                         .fillMaxWidth()
                         .height(150.dp)
                 )
+            }
+            popularLocation.name?.let { title ->
                 Text(
-                    text = popularLocation.name,
+                    text = title,
                     modifier = Modifier
                         .padding(start = 1.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
                         .fillMaxWidth(.5f)
@@ -136,7 +140,8 @@ fun PopularListItem(popularLocation: Results){
                     fontSize = 19.sp,
                     fontWeight = FontWeight.Bold
                 )
-
+            }
+            popularLocation.rating?.let { rate ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -144,41 +149,49 @@ fun PopularListItem(popularLocation: Results){
                     ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    DisplayStarRating(rating = popularLocation.rating)
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 2.dp)
-                            .align(Alignment.CenterVertically)
-                        ,
-                        textAlign = TextAlign.Center,
-                        text = "${popularLocation.review_count} Reviews",
-                        color = Color.Gray
-                    )
+                    popularLocation.rating?.let {
+                        DisplayStarRating(rating = rate)
+                    }
+                    popularLocation.review_count?.let { reviewCount ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 2.dp)
+                                .align(Alignment.CenterVertically)
+                            ,
+                            textAlign = TextAlign.Center,
+                            text = "$reviewCount Reviews",
+                            color = Color.Gray
+                        )
+                    }
                 }
+            }
+            popularLocation.price?.let { price ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if(popularLocation.price == ""){
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 2.dp)
-                                .align(Alignment.CenterVertically)
-                            ,
-                            textAlign = TextAlign.Center,
-                            text = "${popularLocation.categories}",
-                            color = Color.Gray
-                        )
-                    } else {
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 2.dp)
-                                .align(Alignment.CenterVertically)
-                            ,
-                            textAlign = TextAlign.Center,
-                            text = "${popularLocation.price} \u2022 ${popularLocation.categories[0].title}",
-                            color = Color.Gray
-                        )
+                    popularLocation.categories?.let { catList ->
+                        if(price == ""){
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 2.dp)
+                                    .align(Alignment.CenterVertically)
+                                ,
+                                textAlign = TextAlign.Center,
+                                text = catList[0].title,
+                                color = Color.Gray
+                            )
+                        } else {
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 2.dp)
+                                    .align(Alignment.CenterVertically)
+                                ,
+                                textAlign = TextAlign.Center,
+                                text = "$price \u2022 ${catList[0].title}",
+                                color = Color.Gray
+                            )
+                        }
                     }
 
                 }

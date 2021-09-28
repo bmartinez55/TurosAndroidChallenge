@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -63,7 +64,7 @@ class MainFragment: Fragment() {
     lateinit var menu: Menu
     private lateinit var retrofitService: RetrofitService
     private lateinit var yelpRepository: YelpRepository
-    var data = mutableListOf<Results>()
+    var popularLocationData = mutableListOf<Results>()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
@@ -76,16 +77,19 @@ class MainFragment: Fragment() {
         const val REQUEST_INTERVAL: Long = 1000 * 60 * 30
     }
 
+    @ExperimentalFoundationApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "Inside onCreateView()")
         val view = inflater.inflate(R.layout.main_frag_layout, container, false)
         isPermitted = SharedPreferencesUtils.getIntegerPref(requireContext(), SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)!!
 
         if(isPermitted == 1){
+
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
             retrofitService = RetrofitService.getInstance()
             yelpRepository = YelpRepository(retrofitService)
             viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
+
             Log.d(TAG, "Before calling getLastLocation()")
             CoroutineScope(IO).launch { getLastLocation(requireContext()) }
             isProgressDisplayed = viewModel.loading.value
@@ -97,6 +101,7 @@ class MainFragment: Fragment() {
 
                 Column {
                     ToolBarMain(query = searchQueryTerm, keyboard = keyBoardController)
+                    ParentFragRecyclerView(popularLocations = popularLocations)
                 }
             }
         } else{
@@ -105,13 +110,6 @@ class MainFragment: Fragment() {
             }
         }
         return view
-    }
-
-    @SuppressLint("UnrememberedMutableState")
-    @Composable
-    fun PreviewToolBar() {
-        ToolBarMain(query = mutableStateOf(""), keyboard = LocalFocusManager.current)
-        PopularLocationsRecyclerView(popularLocations = data)
     }
 
     @Composable
@@ -293,7 +291,7 @@ class MainFragment: Fragment() {
                             if(location == null){
                                 getNewLocation()
                             } else {
-                                getPopularLocations(location.latitude, location.longitude)
+                                viewModel.getPopularLocations(location.latitude, location.longitude)
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.latitude.toFloat())
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.longitude.toFloat())
                             }
@@ -322,28 +320,8 @@ class MainFragment: Fragment() {
         override fun onLocationResult(location: LocationResult) {
             SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.lastLocation.latitude.toFloat())
             SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.lastLocation.longitude.toFloat())
-            getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude)
+            viewModel.getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude)
         }
-    }
-
-    private fun getPopularLocations(latitude: Double?, longitude: Double?) {
-        val loading = viewModel.loading.value
-        viewModel.getPopularLocations(latitude, longitude)
-        viewModel.data.observe(viewLifecycleOwner, {
-            if(it.isEmpty()){
-                Log.d(TAG, "Search came back empty")
-            } else {
-                if(data.isNotEmpty()){
-                    data.clear()
-                }
-                data.addAll(it)
-
-//                progressDialog.visibility = View.GONE
-//                recyclerView.visibility = View.VISIBLE
-//                adapter.notifyDataSetChanged()
-            }
-
-        })
     }
 
 //    private fun searchData(searchTerm: String){
