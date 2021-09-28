@@ -18,7 +18,6 @@ import org.json.JSONObject
 class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
     private val TAG: String = MainViewModel::class.java.name
-    val data = MutableLiveData<List<Results>>()
     val popularLocationResults: MutableState<List<Results>> = mutableStateOf(listOf())
     var loading = mutableStateOf(false)
     val searchTermQuery = mutableStateOf("")
@@ -30,7 +29,7 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                 loading.value = true
                 val response = yelpRepository.getSearchResults(searchTerm, latitude!!, longitude!!)
                 if(response.body() != null){
-                    data.postValue(response.body()!!.restaurants.toList())
+                    //data.postValue(response.body()!!.restaurants.toList())
                 } else {
                     Log.d(TAG, response.message())
                 }
@@ -49,7 +48,6 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
                 loading.value = true
                 val response = yelpRepository.getPopularLocations(latitude!!, longitude!!)
                 if(response.body() != null){
-                    data.postValue(response.body()!!.restaurants.toList())
                     popularLocationResults.value = response.body()!!.restaurants
                 } else {
                     Log.d(TAG, response.message())
@@ -61,25 +59,6 @@ class MainViewModel constructor(private val yelpRepository: YelpRepository): Vie
             }
         }
     }
-
-    //Calls endpoint and gets the response and either add data to list or send error message to onError method
-//    fun getAllBeerLocations() {
-//        viewModelScope.launch {
-//            val response = yelpRepository.getAllBeerLocations()
-//            //withContext(Dispatchers.Main) {
-//                if(response.isSuccessful){
-//                    Log.d(MainViewModel::class.java.name, response.body().toString())
-//                    //beerData.postValue(response.body())
-//                    //loading.value = false
-//                } else {
-//                    Log.d(MainViewModel::class.java.name, response.message())
-//                    try{
-//                        onError("Error: ${response.message()}")
-//                    } catch(e: Exception) { Log.d(MainViewModel::class.java.name, e.localizedMessage)}
-//                }
-//            //}
-//        }
-//    }
 
     fun onSearchTermChanged(newTerm: String) {
         this.searchTermQuery.value = newTerm
