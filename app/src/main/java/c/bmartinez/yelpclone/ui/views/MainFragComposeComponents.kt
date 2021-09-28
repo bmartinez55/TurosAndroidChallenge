@@ -6,18 +6,17 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Results
+import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
+import c.bmartinez.yelpclone.utils.LoadPicture
 
 @Composable
 fun MainFragProgressDialog(isDisplayed: Boolean) {
@@ -117,16 +118,18 @@ fun PopularListItem(popularLocation: Results){
         elevation = 0.dp
     ) {
         Column {
-            popularLocation.image_url?.let {
-                Image(
-                    bitmap = ImageBitmap
-                        .imageResource(R.drawable.temp_business_icon),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp)
-                )
+            popularLocation.image_url?.let { url ->
+                val image = LoadPicture(url = url, defaultImage = DEFAULT_BUSINESS_IMAGE).value
+                image?.let { img ->
+                    Image(
+                        bitmap = img.asImageBitmap(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp)
+                    )
+                }
             }
             popularLocation.name?.let { title ->
                 Text(
