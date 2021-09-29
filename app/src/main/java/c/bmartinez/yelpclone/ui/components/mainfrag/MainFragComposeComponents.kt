@@ -1,8 +1,10 @@
-package c.bmartinez.yelpclone.ui.views
+package c.bmartinez.yelpclone.ui.components.mainfrag
 
+import android.os.Bundle
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Results
 import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
@@ -48,7 +51,7 @@ fun MainFragProgressDialog(isDisplayed: Boolean) {
 //Parent Recycler View that holds nested Recycler Views
 @ExperimentalFoundationApi
 @Composable
-fun ParentFragRecyclerView(popularLocations: List<Results>) {
+fun ParentFragRecyclerView(popularLocations: List<Results>, navigationController: NavController) {
     LazyColumn(
         contentPadding = PaddingValues(start = 10.dp)
     ){
@@ -65,13 +68,13 @@ fun ParentFragRecyclerView(popularLocations: List<Results>) {
         }
 
         item {
-            PopularLocationsRecyclerView(popularLocations)
+            PopularLocationsRecyclerView(popularLocations, navigationController = navigationController)
         }
     }
 }
 
 @Composable
-fun PopularLocationsRecyclerView(popularLocations: List<Results>) {
+fun PopularLocationsRecyclerView(popularLocations: List<Results>, navigationController: NavController) {
     if(popularLocations == null){
 
     } else {
@@ -99,7 +102,15 @@ fun PopularLocationsRecyclerView(popularLocations: List<Results>) {
             )
             LazyRow{
                 itemsIndexed(items = popularLocations) { index, popLocation ->
-                    PopularListItem(popularLocation = popLocation)
+                    PopularListItem(popularLocation = popLocation,
+                        onClick = {
+                                  if(!popLocation.id.isNullOrEmpty()){
+                                      val bundle = Bundle()
+                                      bundle.putString("locationID", popLocation.id)
+                                      navigationController.navigate(R.id.viewLocationDetails, bundle)
+                                  }
+                        }
+                    )
                 }
             }
         }
@@ -107,13 +118,14 @@ fun PopularLocationsRecyclerView(popularLocations: List<Results>) {
 }
 
 @Composable
-fun PopularListItem(popularLocation: Results){
+fun PopularListItem(popularLocation: Results, onClick: () -> Unit){
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .width(270.dp)
             .padding(start = 0.dp, end = 8.dp, top = 0.dp, bottom = 0.dp)
             .border(width = 0.dp, color = Color.Transparent, shape = RectangleShape)
+            .clickable(onClick = onClick)
         ,
         elevation = 0.dp
     ) {
