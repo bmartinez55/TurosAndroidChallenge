@@ -33,12 +33,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.network.repository.YelpRepository
 import c.bmartinez.yelpclone.network.services.RetrofitService
 import c.bmartinez.yelpclone.data.viewmodels.MainViewModel
 import c.bmartinez.yelpclone.data.viewmodels.MyViewModelFactory
-import c.bmartinez.yelpclone.ui.views.ParentFragRecyclerView
+import c.bmartinez.yelpclone.ui.components.mainfrag.ParentFragRecyclerView
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
@@ -66,25 +67,30 @@ class MainFragment: Fragment() {
     @ExperimentalFoundationApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "Inside onCreateView()")
-        val view = inflater.inflate(R.layout.main_frag_layout, container, false)
+        //val view = inflater.inflate(R.layout.main_frag_layout, container, false)
         isPermitted = SharedPreferencesUtils.getIntegerPref(requireContext(), SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)!!
+        val view: View
 
         if(isPermitted == 1){
             //isProgressDisplayed = viewModel.loading.value
+            view = ComposeView(requireContext()).apply {
+                setContent {
+                    val popularLocations = viewModel.popularLocationResults.value
+                    val searchQueryTerm = remember { mutableStateOf("") }
+                    val keyBoardController = LocalFocusManager.current
+                    val navController = findNavController()
 
-            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
-                val popularLocations = viewModel.popularLocationResults.value
-                val searchQueryTerm = remember { mutableStateOf("") }
-                val keyBoardController = LocalFocusManager.current
-
-                Column {
-                    ToolBarMain(query = searchQueryTerm, keyboard = keyBoardController)
-                    ParentFragRecyclerView(popularLocations = popularLocations)
+                    Column {
+                        ToolBarMain(query = searchQueryTerm, keyboard = keyBoardController)
+                        ParentFragRecyclerView(popularLocations = popularLocations, navigationController = navController)
+                    }
                 }
             }
         } else{
-            view.findViewById<ComposeView>(R.id.mainFragComposeView).setContent {
+            view = ComposeView(requireContext()).apply {
+                setContent {
 
+                }
             }
         }
         return view
