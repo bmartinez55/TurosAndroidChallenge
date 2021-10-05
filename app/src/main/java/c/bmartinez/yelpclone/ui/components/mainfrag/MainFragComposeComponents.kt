@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Results
+import c.bmartinez.yelpclone.ui.components.utils.DisplayStarRating
 import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
 import c.bmartinez.yelpclone.utils.LoadPicture
 
@@ -162,7 +163,7 @@ fun PopularListItem(popularLocation: Results, onClick: () -> Unit){
                     ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    DisplayStarRating(rating = rate)
+                    DisplayStarRating(rating = rate, height = 40, width = 80)
                     Text(
                         modifier = Modifier
                             .padding(start = 2.dp)
@@ -201,101 +202,5 @@ fun PopularListItem(popularLocation: Results, onClick: () -> Unit){
                 }
             }
         }
-    }
-}
-
-@Composable
-fun DisplayStarRating(rating: Double){
-    when(rating){
-        0.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_0),
-            contentDescription = null,
-        )
-        1.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_1),
-            contentDescription = null
-        )
-        1.5 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_1_half),
-            contentDescription = null
-        )
-        2.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_2),
-            contentDescription = null
-        )
-        2.5 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_2_half),
-            contentDescription = null
-        )
-        3.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_3),
-            contentDescription = null
-        )
-        3.5 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_3_half),
-            contentDescription = null
-        )
-        4.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_4),
-            contentDescription = null
-        )
-        4.5 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_4_half),
-            contentDescription = null
-        )
-        5.0 -> Image(
-            modifier = Modifier
-                .padding(start = 2.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .height(40.dp)
-                .width(80.dp)
-            ,
-            bitmap = ImageBitmap.imageResource(id = R.drawable.stars_regular_5),
-            contentDescription = null
-        )
     }
 }
