@@ -200,7 +200,7 @@ class MainFragment: Fragment() {
 
         if(isPermitted == 1){
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-            retrofitService = RetrofitService.getInstance()
+            retrofitService = RetrofitService.getInstance(requireContext())
             yelpRepository = YelpRepository(retrofitService)
             viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
 

@@ -11,6 +11,8 @@ import c.bmartinez.yelpclone.utils.searchPopularRadius
  */
 class YelpRepository constructor(private val retrofitService: RetrofitService) {
 
+    suspend fun getBusinessDetails(id: String) = retrofitService.getBusinessDetails(id)
+
     suspend fun getSearchResults(searchTerm: String, latitude: Double, longitude: Double) = retrofitService.getSearchResults(
         searchTerm,
         latitude,
