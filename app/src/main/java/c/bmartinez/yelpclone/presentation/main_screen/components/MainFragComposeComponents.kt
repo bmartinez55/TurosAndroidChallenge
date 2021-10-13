@@ -88,8 +88,8 @@ fun PopularLocationsRecyclerView(popularLocations: List<Results>, navigationCont
                 maxLines = 1,
                 fontSize = 21.sp,
                 fontWeight = FontWeight.Bold
-            )
-            Text(
+                )
+                Text(
                 text = "The best in your neighborhood",
                 modifier = Modifier
                     .padding(start = 0.dp, end = 0.dp, top = 0.dp, bottom = 10.dp)
@@ -98,8 +98,8 @@ fun PopularLocationsRecyclerView(popularLocations: List<Results>, navigationCont
                 fontSize = 14.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.Light
-            )
-            LazyRow{
+                )
+                LazyRow{
                 itemsIndexed(items = popularLocations) { index, popLocation ->
                     PopularListItem(popularLocation = popLocation,
                         onClick = {
@@ -111,7 +111,7 @@ fun PopularLocationsRecyclerView(popularLocations: List<Results>, navigationCont
                         }
                     )
                 }
-            }
+           }
         }
     }
 }

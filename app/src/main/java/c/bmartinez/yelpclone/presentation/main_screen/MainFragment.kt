@@ -1,7 +1,10 @@
-package c.bmartinez.yelpclone.presentation.main_screen
+package c.bmartinez.yelpclone.ui.views.mainfragment
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -29,24 +32,33 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import c.bmartinez.yelpclone.R
+import c.bmartinez.yelpclone.network.repository.YelpRepository
+import c.bmartinez.yelpclone.network.services.RetrofitService
 import c.bmartinez.yelpclone.data.viewmodels.MainViewModel
-import c.bmartinez.yelpclone.presentation.mainscreen.components.mainfrag.ParentFragRecyclerView
+import c.bmartinez.yelpclone.data.viewmodels.MyViewModelFactory
+import c.bmartinez.yelpclone.ui.components.mainfrag.ParentFragRecyclerView
+import c.bmartinez.yelpclone.utils.LocationUtils
+import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.gms.location.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
-@AndroidEntryPoint
 class MainFragment: Fragment() {
 
     private val TAG = MainFragment::class.java.name
     lateinit var viewModel: MainViewModel
     lateinit var menu: Menu
-    //private lateinit var retrofitApi: RetrofitApi
-    //private lateinit var yelpRepository: YelpRepository
+    private lateinit var retrofitService: RetrofitService
+    private lateinit var yelpRepository: YelpRepository
 
-//    private lateinit var fusedLocationClient: FusedLocationProviderClient
-//    private lateinit var locationRequest: LocationRequest
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
 
     private var isPermitted: Int = 0
 
@@ -187,58 +199,58 @@ class MainFragment: Fragment() {
     private fun initView(isPermitted: Int){
 
         if(isPermitted == 1){
-            //fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-            //retrofitApi = RetrofitApi.getInstance(requireContext())
-            //yelpRepository = YelpRepository(retrofitApi)
-            //viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+            retrofitService = RetrofitService.getInstance(requireContext())
+            yelpRepository = YelpRepository(retrofitService)
+            viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
 
-//            Log.d(TAG, "Before calling getLastLocation()")
-//            CoroutineScope(IO).launch { getLastLocation(requireContext()) }
+            Log.d(TAG, "Before calling getLastLocation()")
+            CoroutineScope(IO).launch { getLastLocation(requireContext()) }
         }
     }
 
-//    @SuppressLint("MissingPermission")
-//    private fun getLastLocation(context: Context){
-//        try {
-//            if(LocationUtils().checkLocationPermissions(context)) {
-//                if(LocationUtils().isLocationEnabled(context)) {
-//                    fusedLocationClient.lastLocation
-//                        .addOnSuccessListener { location: Location? ->
-//                            if(location == null){
-//                                getNewLocation()
-//                            } else {
-//                                CoroutineScope(IO).launch { viewModel.getPopularLocations(location.latitude, location.longitude) }
-//                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.latitude.toFloat())
-//                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.longitude.toFloat())
-//                            }
-//                        }
-//                        .addOnFailureListener {
-//                            Log.d(TAG, "Landed on the Failure listener")
-//                        }
-//                } else {
-//                    Log.d(TAG, "Location Service is off. Turning it on...")
-//                    getNewLocation()
-//                }
-//            }
-//        } catch(e: Exception) { Log.d(TAG, e.stackTraceToString()) }
-//    }
+    @SuppressLint("MissingPermission")
+    private fun getLastLocation(context: Context){
+        try {
+            if(LocationUtils().checkLocationPermissions(context)) {
+                if(LocationUtils().isLocationEnabled(context)) {
+                    fusedLocationClient.lastLocation
+                        .addOnSuccessListener { location: Location? ->
+                            if(location == null){
+                                getNewLocation()
+                            } else {
+                                CoroutineScope(IO).launch { viewModel.getPopularLocations(location.latitude, location.longitude) }
+                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.latitude.toFloat())
+                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.longitude.toFloat())
+                            }
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Landed on the Failure listener")
+                        }
+                } else {
+                    Log.d(TAG, "Location Service is off. Turning it on...")
+                    getNewLocation()
+                }
+            }
+        } catch(e: Exception) { Log.d(TAG, e.stackTraceToString()) }
+    }
 
-//    @SuppressLint("MissingPermission")
-//    private fun getNewLocation() {
-//        locationRequest = LocationRequest()
-//        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-//        locationRequest.interval = REQUEST_LOCATION_INTERVAL
-//        locationRequest.fastestInterval = 0
-//        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
-//    }
+    @SuppressLint("MissingPermission")
+    private fun getNewLocation() {
+        locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = REQUEST_LOCATION_INTERVAL
+        locationRequest.fastestInterval = 0
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+    }
 
-//    private val locationCallback = object: LocationCallback() {
-//        override fun onLocationResult(location: LocationResult) {
-//            SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.lastLocation.latitude.toFloat())
-//            SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.lastLocation.longitude.toFloat())
-//            CoroutineScope(IO).launch { viewModel.getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude) }
-//        }
-//    }
+    private val locationCallback = object: LocationCallback() {
+        override fun onLocationResult(location: LocationResult) {
+            SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.lastLocation.latitude.toFloat())
+            SharedPreferencesUtils.setFloatPref(context!!, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.lastLocation.longitude.toFloat())
+            CoroutineScope(IO).launch { viewModel.getPopularLocations(location.lastLocation.latitude, location.lastLocation.longitude) }
+        }
+    }
 
 //    private fun searchData(searchTerm: String){
 //        val latitude: Double? = SharedPreferencesUtils.getFloatPref(requireContext(), SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, 0.0f)?.toDouble()

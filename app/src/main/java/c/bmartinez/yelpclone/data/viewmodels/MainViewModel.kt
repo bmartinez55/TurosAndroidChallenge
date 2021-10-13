@@ -7,24 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import c.bmartinez.yelpclone.data.model.*
 import c.bmartinez.yelpclone.network.repository.YelpRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-//import c.bmartinez.yelpclone.utils.EMPTY_BUSINESS_DETAILS_OBJECT
+import c.bmartinez.yelpclone.utils.EMPTY_BUSINESS_DETAILS_OBJECT
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.emptyFlow
-import javax.inject.Inject
 
 /*
     Primary viewmodel that connects the model and the view. Calls both pizza and beer endpoints with coroutines
  */
-@HiltViewModel
-class MainViewModel
-@Inject constructor(
-    private val yelpRepository: YelpRepository
-): ViewModel() {
+class MainViewModel constructor(private val yelpRepository: YelpRepository): ViewModel() {
 
     private val TAG: String = MainViewModel::class.java.name
     val popularLocationResults: MutableState<List<Results>> = mutableStateOf(listOf())
-    //val locationBusinessDetails: MutableState<YelpBusinessDetails> = mutableStateOf(EMPTY_BUSINESS_DETAILS_OBJECT)
+    val locationBusinessDetails: MutableState<YelpBusinessDetails> = mutableStateOf(EMPTY_BUSINESS_DETAILS_OBJECT)
     var loading = mutableStateOf(false)
     val searchTermQuery = mutableStateOf("")
 
@@ -35,7 +29,7 @@ class MainViewModel
                 loading.value = true
                 val response = yelpRepository.getBusinessDetails(id)
                 if(response.body() != null){
-                    //locationBusinessDetails.value = response.body()!!
+                    locationBusinessDetails.value = response.body()!!
                 } else {
                     Log.d(TAG, response.message())
                 }
