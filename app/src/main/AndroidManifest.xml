@@ -9,6 +9,7 @@
     <uses-feature android:name="android.hardware.location.gps"/>
 
     <application
+        android:name=".ui.BaseApplication"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TurosAndroidChallenge">
-        <activity android:name="c.bmartinez.yelpclone.ui.views.MainActivity"
+
+        <activity android:name="c.bmartinez.yelpclone.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>

@@ -1,9 +1,11 @@
-package c.bmartinez.yelpclone.ui.views
+package c.bmartinez.yelpclone.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import c.bmartinez.yelpclone.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.name

@@ -9,13 +9,15 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
-import c.bmartinez.yelpclone.ui.views.MainActivity
+import c.bmartinez.yelpclone.ui.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashScreen: AppCompatActivity() {
 
     val TAG = SplashScreen::class.java.name

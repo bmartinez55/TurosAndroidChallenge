@@ -44,11 +44,13 @@ import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
 import com.google.android.gms.location.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+@AndroidEntryPoint
 class MainFragment: Fragment() {
 
     private val TAG = MainFragment::class.java.name
