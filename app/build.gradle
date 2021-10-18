@@ -43,6 +43,9 @@ android {
     dataBinding {
         enabled = true
     }
+    hilt {
+        enableExperimentalClasspathAggregation = true
+    }
 }
 
 dependencies {
@@ -93,6 +96,7 @@ dependencies {
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.2'
     implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.2'
     implementation "androidx.compose.compiler:compiler:1.1.0-alpha04"
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
 
     //Kotlin Navigation
     def nav_version = "2.3.5"

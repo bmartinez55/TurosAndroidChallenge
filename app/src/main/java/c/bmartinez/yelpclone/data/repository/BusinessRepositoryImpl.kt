@@ -6,6 +6,7 @@ import c.bmartinez.yelpclone.data.remote.dto.business_search.BusinessSearchDto
 import c.bmartinez.yelpclone.domain.repository.BusinessRepository
 import c.bmartinez.yelpclone.utils.maxPopularResults
 import c.bmartinez.yelpclone.utils.searchPopularRadius
+import okhttp3.Response
 import javax.inject.Inject
 
 class BusinessRepositoryImpl @Inject constructor(
@@ -15,8 +16,7 @@ class BusinessRepositoryImpl @Inject constructor(
     override suspend fun getPopularLocations(
         latitude: Double,
         longitude: Double
-    ): BusinessSearchDto {
-        return retrofitApi.getPopularLocations(
+    ) = retrofitApi.getPopularLocations(
             latitude,
             longitude,
             searchPopularRadius,
@@ -24,10 +24,8 @@ class BusinessRepositoryImpl @Inject constructor(
             "rating",
             maxPopularResults
         )
-    }
 
-    override suspend fun getBusinessDetails(businessId: String): BusinessDetailsDto {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getBusinessDetails(businessId: String) = retrofitApi
+        .getBusinessDetails(businessId)
 
 }

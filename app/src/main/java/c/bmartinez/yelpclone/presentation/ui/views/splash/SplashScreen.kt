@@ -9,9 +9,10 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
-import c.bmartinez.yelpclone.presentation.ui.MainActivity
+import c.bmartinez.yelpclone.presentation.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.services.DeviceLocationService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -66,7 +67,7 @@ class SplashScreen: AppCompatActivity() {
     }
 
     private fun checkLocationPermissions(){
-        if(!LocationUtils().checkLocationPermissions(this)) {
+        if(!LocationUtils().checkLocationPermissions(applicationContext)) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
                 ActivityCompat.requestPermissions(
                     this,
@@ -82,10 +83,14 @@ class SplashScreen: AppCompatActivity() {
     private fun startMainActivity(permissionGranted: Boolean){
         Log.d(TAG, "Before switching to MainActivity")
 
-        if(permissionGranted){ SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1) }
+        if(permissionGranted){
+            Log.d(TAG, "Starting Location Service...")
+            startService(Intent(applicationContext, DeviceLocationService::class.java))
+            SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1)
+        }
         else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)}
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(applicationContext, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()

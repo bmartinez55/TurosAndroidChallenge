@@ -2,6 +2,7 @@ package c.bmartinez.yelpclone.domain.repository
 
 import c.bmartinez.yelpclone.data.remote.dto.business_details.BusinessDetailsDto
 import c.bmartinez.yelpclone.data.remote.dto.business_search.BusinessSearchDto
+import okhttp3.Response
 
 interface BusinessRepository {
 

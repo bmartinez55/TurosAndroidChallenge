@@ -7,4 +7,6 @@ const val searchNewRadius = 40000 //This is approx. 25 miles
 const val metersInMile = 1609.344 //This is what one mile is in meters
 const val maxPopularResults = 20 //Max amount of results to retrieve from endpoint for popular locations
 const val maxListResults = 50 //Max amount of results to retrieve from endpoint for list use
-const val REQUEST_LOCATION_INTERVAL: Long = 1000 * 60 * 30
+const val REQUEST_LOCATION_INTERVAL: Long = 1000 * 60 * 5 // 5 mins in milliseconds
+const val PARAM_KEY_DEVICE_LATITUDE = "latitude"
+const val PARAM_KEY_DEVICE_LONGITUDE = "longitude"

@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TurosAndroidChallenge">
 
-        <activity android:name="c.bmartinez.yelpclone.presentation.ui.MainActivity"
+        <activity android:name="c.bmartinez.yelpclone.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
@@ -38,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".utils.services.DeviceLocationService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>
