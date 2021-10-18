@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views.mainfragment
+package c.bmartinez.yelpclone.presentation.ui.views.mainfragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -36,10 +36,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.network.repository.YelpRepository
-import c.bmartinez.yelpclone.network.services.RetrofitService
+import c.bmartinez.yelpclone.data.remote.RetrofitApi
 import c.bmartinez.yelpclone.data.viewmodels.MainViewModel
 import c.bmartinez.yelpclone.data.viewmodels.MyViewModelFactory
-import c.bmartinez.yelpclone.ui.components.mainfrag.ParentFragRecyclerView
+import c.bmartinez.yelpclone.presentation.mainscreen.components.mainfrag.ParentFragRecyclerView
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
@@ -56,7 +56,7 @@ class MainFragment: Fragment() {
     private val TAG = MainFragment::class.java.name
     lateinit var viewModel: MainViewModel
     lateinit var menu: Menu
-    private lateinit var retrofitService: RetrofitService
+    private lateinit var retrofitApi: RetrofitApi
     private lateinit var yelpRepository: YelpRepository
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -202,8 +202,8 @@ class MainFragment: Fragment() {
 
         if(isPermitted == 1){
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-            retrofitService = RetrofitService.getInstance(requireContext())
-            yelpRepository = YelpRepository(retrofitService)
+            retrofitApi = RetrofitApi.getInstance(requireContext())
+            yelpRepository = YelpRepository(retrofitApi)
             viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
 
             Log.d(TAG, "Before calling getLastLocation()")

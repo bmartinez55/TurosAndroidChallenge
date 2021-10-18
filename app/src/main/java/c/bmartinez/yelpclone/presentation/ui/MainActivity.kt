@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui
+package c.bmartinez.yelpclone.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

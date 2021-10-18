@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views.mainfragment
+package c.bmartinez.yelpclone.presentation.ui.views.mainfragment
 
 //import android.content.Context
 //import android.view.LayoutInflater

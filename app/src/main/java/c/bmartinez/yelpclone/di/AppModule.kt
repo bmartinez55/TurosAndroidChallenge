@@ -1,7 +1,7 @@
 package c.bmartinez.yelpclone.di
 
 import android.content.Context
-import c.bmartinez.yelpclone.ui.BaseApplication
+import c.bmartinez.yelpclone.BaseApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,4 +18,6 @@ object AppModule {
     fun provideApplication(@ApplicationContext app: Context): BaseApplication {
         return app as BaseApplication
     }
+
+
 }

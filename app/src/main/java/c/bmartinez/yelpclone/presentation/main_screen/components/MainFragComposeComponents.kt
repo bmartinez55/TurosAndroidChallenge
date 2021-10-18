@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.components.mainfrag
+package c.bmartinez.yelpclone.presentation.mainscreen.components.mainfrag
 
 import android.os.Bundle
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -14,9 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Results
-import c.bmartinez.yelpclone.ui.components.utils.DisplayStarRating
+import c.bmartinez.yelpclone.presentation.ui.components.utils.DisplayStarRating
 import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
 import c.bmartinez.yelpclone.utils.LoadPicture
 

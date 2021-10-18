@@ -1,6 +1,6 @@
 package c.bmartinez.yelpclone.network.repository
 
-import c.bmartinez.yelpclone.network.services.RetrofitService
+import c.bmartinez.yelpclone.data.remote.RetrofitApi
 import c.bmartinez.yelpclone.utils.maxListResults
 import c.bmartinez.yelpclone.utils.maxPopularResults
 import c.bmartinez.yelpclone.utils.searchNewRadius
@@ -9,11 +9,11 @@ import c.bmartinez.yelpclone.utils.searchPopularRadius
 /*
     This class holds the endpoint calls with query search data
  */
-class YelpRepository constructor(private val retrofitService: RetrofitService) {
+class YelpRepository constructor(private val retrofitApi: RetrofitApi) {
 
-    suspend fun getBusinessDetails(id: String) = retrofitService.getBusinessDetails(id)
+    suspend fun getBusinessDetails(id: String) = retrofitApi.getBusinessDetails(id)
 
-    suspend fun getSearchResults(searchTerm: String, latitude: Double, longitude: Double) = retrofitService.getSearchResults(
+    suspend fun getSearchResults(searchTerm: String, latitude: Double, longitude: Double) = retrofitApi.getSearchResults(
         searchTerm,
         latitude,
         longitude,
@@ -22,7 +22,7 @@ class YelpRepository constructor(private val retrofitService: RetrofitService) {
         maxListResults
     )
 
-    suspend fun getPopularLocations(latitude: Double, longitude: Double) = retrofitService.getPopularLocations(
+    suspend fun getPopularLocations(latitude: Double, longitude: Double) = retrofitApi.getPopularLocations(
         latitude,
         longitude,
         searchPopularRadius,

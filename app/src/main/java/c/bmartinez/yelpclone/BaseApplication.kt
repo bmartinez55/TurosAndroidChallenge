@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui
+package c.bmartinez.yelpclone
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

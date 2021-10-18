@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views.splash
+package c.bmartinez.yelpclone.presentation.ui.views.splash
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,7 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
-import c.bmartinez.yelpclone.ui.MainActivity
+import c.bmartinez.yelpclone.presentation.ui.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
 import dagger.hilt.android.AndroidEntryPoint
