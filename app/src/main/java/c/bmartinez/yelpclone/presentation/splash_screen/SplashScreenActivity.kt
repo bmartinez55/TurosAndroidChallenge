@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views.splash
+package c.bmartinez.yelpclone.presentation.splash_screen
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,16 +9,15 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.core.app.ActivityCompat
-import c.bmartinez.yelpclone.ui.views.MainActivity
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class SplashScreen: AppCompatActivity() {
+class SplashScreenActivity: AppCompatActivity() {
 
-    val TAG = SplashScreen::class.java.name
+    val TAG = SplashScreenActivity::class.java.name
 
     companion object {
         private const val MY_PERMISSIONS_REQUEST_LOCATION = 99
@@ -28,7 +27,7 @@ class SplashScreen: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SplashParentLayout()
+            //SplashParentLayout()
         }
         Log.d(TAG, "Inside onCreate()")
 
@@ -52,11 +51,11 @@ class SplashScreen: AppCompatActivity() {
             MY_PERMISSIONS_REQUEST_LOCATION -> {
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if(LocationUtils().checkLocationPermissions(this)) {
-                        startMainActivity(true)
+                        //startMainActivity(true)
                     }
                 } else {
                     Toast.makeText(this, "Permission Denied: certain features will not work properly", Toast.LENGTH_SHORT).show()
-                    startMainActivity(false)
+                    //startMainActivity(false)
                 }
             }
         }
@@ -73,19 +72,19 @@ class SplashScreen: AppCompatActivity() {
                 )
             }
         } else {
-            CoroutineScope(IO).launch { startMainActivity(true) }
+            //CoroutineScope(IO).launch { startMainActivity(true) }
         }
     }
 
-    private fun startMainActivity(permissionGranted: Boolean){
-        Log.d(TAG, "Before switching to MainActivity")
-
-        if(permissionGranted){ SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1) }
-        else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)}
-
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
-    }
+//    private fun startMainActivity(permissionGranted: Boolean){
+//        Log.d(TAG, "Before switching to MainActivity")
+//
+//        if(permissionGranted){ SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1) }
+//        else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)}
+//
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        startActivity(intent)
+//        finish()
+//    }
 }

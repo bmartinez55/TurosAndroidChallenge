@@ -1,28 +1,29 @@
 package c.bmartinez.yelpclone.utils
 
 import c.bmartinez.yelpclone.data.model.*
+import c.bmartinez.yelpclone.data.remote.dto.business_search.CategoriesDto
+import c.bmartinez.yelpclone.domain.model.business_search.BusinessSearch
+import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 import com.google.gson.annotations.SerializedName
 
-val TEST_RESULTS_OBJECT = Results(
-    "",
-    "Burger King",
-    "(831) 123-4567",
-    ";lkasjdf;lkjas.jpg",
-    1452.45,
-    ResultsLocation(
-        "123 I'm Here St",
-        "Salinas",
-        "CA",
-        "93906"
-    ),
-    1234,
+val TEST_BUSINESS_SEARCH_OBJECT = Businesses(
     4.5,
-    "$$$",
+    "$$$$",
+    "businessID",
     listOf(
-        ResultsCategories("Smoothie"),
-        ResultsCategories("Juice")
+        CategoriesDto(
+            "test-1",
+            "Test 1'"
+        ),
+        CategoriesDto(
+            "test-2",
+            "Test 2"
+        )
     ),
-   listOf("Deliver", "Pick-up")
+    1452,
+    "Burger King",
+    "a;sdlkj;alskdfjg.jpg",
+    45131.55,
 )
 
 val EMPTY_BUSINESS_DETAILS_OBJECT = YelpBusinessDetails(

@@ -67,12 +67,4 @@ object NetworkModule {
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
-
-    @Singleton
-    @Provides
-    fun provideRetrofitApi(retrofit: Retrofit): RetrofitApi = retrofit.create(RetrofitApi::class.java)
-
-    @Singleton
-    @Provides
-    fun provideBusinessRepository(retrofitApi: RetrofitApi) = BusinessRepositoryImpl(retrofitApi)
 }

@@ -56,8 +56,8 @@ class DeviceLocationService: Service() {
                             if(location == null){
                                 getNewLocation()
                             } else {
-                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.latitude.toFloat())
-                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.longitude.toFloat())
+                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LAT, location.latitude.toFloat())
+                                SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LONG, location.longitude.toFloat())
                             }
                         }
                         .addOnFailureListener {
@@ -82,8 +82,8 @@ class DeviceLocationService: Service() {
 
     private val locationCallback = object: LocationCallback() {
         override fun onLocationResult(location: LocationResult) {
-            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LAT, location.lastLocation.latitude.toFloat())
-            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils().COORDINATES_SPF, SharedPreferencesUtils().COORDINATES_LONG, location.lastLocation.longitude.toFloat())
+            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LAT, location.lastLocation.latitude.toFloat())
+            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LONG, location.lastLocation.longitude.toFloat())
         }
     }
 }

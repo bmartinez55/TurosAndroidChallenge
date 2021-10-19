@@ -1,22 +1,18 @@
-package c.bmartinez.yelpclone.ui.components.searchlist
+package c.bmartinez.yelpclone.presentation.search_list_screen.components
 
-import android.os.Bundle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Room
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.data.model.Results
-import c.bmartinez.yelpclone.ui.components.utils.DisplayStarRating
+import c.bmartinez.yelpclone.presentation.utils.DisplayStarRating
 import c.bmartinez.yelpclone.utils.*
 
 @Composable
@@ -61,11 +57,11 @@ fun SearchRecyclerView(searchedLocations: List<Results>, navigationController: N
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewSearchRecyclerView() { 
-    SearchListItem(searchItem = TEST_RESULTS_OBJECT)
-}
+//@Preview(showSystemUi = true)
+//@Composable
+//fun PreviewSearchRecyclerView() {
+//    SearchListItem(searchItem = TEST_RESULTS_OBJECT)
+//}
 
 @Composable
 fun SearchListItem(searchItem: Results) {//, onClick: () -> Unit
@@ -182,9 +178,9 @@ fun SearchListItem(searchItem: Results) {//, onClick: () -> Unit
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(painter = painterResource(id = R.drawable.ic_baseline_check_24), contentDescription = null)
-                Text(
-                    text = searchItem.transactions.joinToString(", ")
-                )
+                //Text(
+                    //text = searchItem.transactions.joinToString(", ")
+                //)
             }
 
             Divider(color = Color.LightGray, thickness = 1.dp)

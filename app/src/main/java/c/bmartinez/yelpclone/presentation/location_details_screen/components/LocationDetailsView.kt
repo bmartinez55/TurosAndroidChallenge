@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.components.locationdetails
+package c.bmartinez.yelpclone.presentation.location_details_screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,8 +28,8 @@ fun LocationDetailsView(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        LocationInfo(location = location, navController = navController)
-        LocationAdditionalInfo(location = location)
+        //LocationInfo(location = location, navController = navController)
+        //LocationAdditionalInfo(location = location)
     }
 }
 

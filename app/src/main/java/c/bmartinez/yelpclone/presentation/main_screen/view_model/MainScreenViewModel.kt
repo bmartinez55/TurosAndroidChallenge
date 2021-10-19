@@ -26,7 +26,7 @@ class MainScreenViewModel @Inject constructor(
     init {
         val latitude = savedStateHandle.get<Double>(PARAM_KEY_DEVICE_LATITUDE)
         val longitude = savedStateHandle.get<Double>(PARAM_KEY_DEVICE_LONGITUDE)
-        getPopularLocations(latitude, longitude)
+        //getPopularLocations(latitude, longitude)
     }
 
     private fun getPopularLocations(latitude: Double, longitude: Double) {

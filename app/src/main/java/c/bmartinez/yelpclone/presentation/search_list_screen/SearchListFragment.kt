@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.views.searchlistfragment
+package c.bmartinez.yelpclone.presentation.search_list_screen
 
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +12,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import c.bmartinez.yelpclone.data.viewmodels.MainViewModel
-import c.bmartinez.yelpclone.data.viewmodels.MyViewModelFactory
-import c.bmartinez.yelpclone.network.repository.YelpRepository
-import c.bmartinez.yelpclone.network.services.RetrofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,9 +24,9 @@ class SearchListFragment: Fragment() {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
-    lateinit var viewModel: MainViewModel
-    private lateinit var retrofitService: RetrofitService
-    private lateinit var yelpRepository: YelpRepository
+//    lateinit var viewModel: MainViewModel
+//    private lateinit var retrofitService: RetrofitService
+//    private lateinit var yelpRepository: YelpRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +49,7 @@ class SearchListFragment: Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val searchData = viewModel.searchBusinessesResults.value
+                //val searchData = viewModel.searchBusinessesResults.value
                 val navController = findNavController()
 
                 Column(modifier = Modifier.fillMaxSize()) {
@@ -66,21 +62,21 @@ class SearchListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        populateView()
+        //populateView()
     }
 
-    private fun populateView() {
-        retrofitService = RetrofitService.getInstance(requireContext())
-        yelpRepository = YelpRepository(retrofitService)
-        viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
-
-        Log.d(TAG, "Before calling getSearchResults")
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getSearchResults(
-                searchTerm = searchTerm,
-                latitude = latitude,
-                longitude = longitude
-            )
-        }
-    }
+//    private fun populateView() {
+//        retrofitService = RetrofitService.getInstance(requireContext())
+//        yelpRepository = YelpRepository(retrofitService)
+//        viewModel = ViewModelProvider(this, MyViewModelFactory(yelpRepository)).get(MainViewModel::class.java)
+//
+//        Log.d(TAG, "Before calling getSearchResults")
+//        CoroutineScope(Dispatchers.IO).launch {
+//            viewModel.getSearchResults(
+//                searchTerm = searchTerm,
+//                latitude = latitude,
+//                longitude = longitude
+//            )
+//        }
+//    }
 }

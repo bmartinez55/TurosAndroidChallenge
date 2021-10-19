@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.ui.components.utils
+package c.bmartinez.yelpclone.presentation.utils
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
