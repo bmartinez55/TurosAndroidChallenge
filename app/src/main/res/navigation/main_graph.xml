@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="c.bmartinez.yelpclone.ui.views.mainfragment.MainFragment"
+        android:name="c.bmartinez.yelpclone.presentation.main_screen.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/viewLocationDetails"

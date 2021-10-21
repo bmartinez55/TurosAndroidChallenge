@@ -18,7 +18,7 @@ const val LOCATION_DETAILS_IMAGE_HEIGHT = 260
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun LoadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitmap?> {
+fun LoadPicture(url: String?, @DrawableRes defaultImage: Int): MutableState<Bitmap?> {
     val bitmapState: MutableState<Bitmap?> = mutableStateOf(null)
 
     Glide.with(LocalContext.current)

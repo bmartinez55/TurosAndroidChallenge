@@ -1,6 +1,5 @@
 package c.bmartinez.yelpclone.presentation.main_screen.components
 
-import android.os.Bundle
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import c.bmartinez.yelpclone.R
 import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 import c.bmartinez.yelpclone.presentation.Screen
 
@@ -51,13 +49,9 @@ fun PopularBusinessesLazyRow(
                 PopularListItem(
                     business = business,
                     onClick = {
-                        navigationController.navigate(Screen.BusinessDetailsScreen.route + "/${business.id}")
-
-//                        if(!business.id.isNullOrEmpty()){
-//                            val bundle = Bundle()
-//                            bundle.putString("locationID", business.id)
-//                            navigationController.navigate(R.id.viewLocationDetails, bundle)
-//                        }
+                        navigationController.navigate(
+                            Screen.BusinessDetailsScreen.route + "/${business.id}"
+                        )
                     }
                 )
             }

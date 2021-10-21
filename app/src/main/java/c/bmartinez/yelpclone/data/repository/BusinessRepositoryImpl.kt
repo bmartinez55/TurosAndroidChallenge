@@ -1,12 +1,9 @@
 package c.bmartinez.yelpclone.data.repository
 
 import c.bmartinez.yelpclone.data.remote.RetrofitApi
-import c.bmartinez.yelpclone.data.remote.dto.business_details.BusinessDetailsDto
 import c.bmartinez.yelpclone.data.remote.dto.business_search.BusinessSearchDto
 import c.bmartinez.yelpclone.domain.repository.BusinessRepository
-import c.bmartinez.yelpclone.utils.maxPopularResults
-import c.bmartinez.yelpclone.utils.searchPopularRadius
-import okhttp3.Response
+import c.bmartinez.yelpclone.utils.YelpConstants
 import javax.inject.Inject
 
 class BusinessRepositoryImpl @Inject constructor(
@@ -19,13 +16,25 @@ class BusinessRepositoryImpl @Inject constructor(
     ) = retrofitApi.getPopularLocations(
             latitude,
             longitude,
-            searchPopularRadius,
+            YelpConstants.SEARCH_POPULAR_RADIUS,
             "restaurants",
             "rating",
-            maxPopularResults
+            YelpConstants.MAX_POPULAR_RESULT_SIZE
         )
 
     override suspend fun getBusinessDetails(businessId: String) = retrofitApi
         .getBusinessDetails(businessId)
 
+    override suspend fun getSearchBusinesses(
+        searchTerm: String,
+        latitude: Double,
+        longitude: Double
+    ) = retrofitApi.getSearchResults(
+        searchTerm,
+        latitude,
+        longitude,
+        YelpConstants.SEARCH_NEW_RADIUS,
+        "rating",
+        YelpConstants.MAX_SEARCH_LIST_SIZE
+    )
 }

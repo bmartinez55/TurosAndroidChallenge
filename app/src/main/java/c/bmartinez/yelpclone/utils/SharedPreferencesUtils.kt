@@ -16,10 +16,11 @@ object SharedPreferencesUtils {
     const val LOCATION_GRANTED = "LOCATION_GRANTED"
 
     fun setStringPref(context: Context, spf: String, key: String, value: String): Boolean {
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null && !TextUtils.isEmpty(key)) {
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null && !TextUtils.isEmpty(key)) {
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.clear()
+            //editor.clear()
             editor.putString(key, value)
             return editor.commit()
         }
@@ -28,18 +29,20 @@ object SharedPreferencesUtils {
 
     fun getStringPref(context: Context, spf: String, key: String): String? {
         var value: String? = null
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null){
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
             value = sharedPreferences.getString(key, null)
         }
         return value
     }
 
     fun setIntegerPref(context: Context, spf: String, key: String, value: Int): Boolean {
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null && !TextUtils.isEmpty(key)) {
-            val editor: SharedPreferences.Editor = sharedPreferences.edit().clear()
-            editor.clear()
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null && !TextUtils.isEmpty(key)) {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            //editor.clear()
             editor.putInt(key, value)
             return editor.commit()
         }
@@ -48,18 +51,20 @@ object SharedPreferencesUtils {
 
     fun getIntegerPref(context: Context, spf: String, key: String, defaultValue: Int): Int? {
         var value: Int? = null
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null){
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
             value = sharedPreferences.getInt(key, defaultValue)
         }
         return value
     }
 
     fun setFloatPref(context: Context, spf: String, key: String, value: Float): Boolean {
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null && !TextUtils.isEmpty(key)) {
-            val editor: SharedPreferences.Editor = sharedPreferences.edit().clear()
-            editor.clear()
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null && !TextUtils.isEmpty(key)) {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            //editor.clear()
             editor.putFloat(key, value)
             return editor.commit()
         }
@@ -68,11 +73,11 @@ object SharedPreferencesUtils {
 
     fun getFloatPref(context: Context, spf: String, key: String, defaultValue: Float): Float? {
         var value: Float? = null
-        val sharedPreferences: SharedPreferences? = context.getSharedPreferences(spf, Context.MODE_PRIVATE)
-        if(sharedPreferences != null){
+        val sharedPreferences: SharedPreferences? =
+            context.getSharedPreferences(spf, Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
             value = sharedPreferences.getFloat(key, defaultValue)
         }
         return value
     }
 }
-

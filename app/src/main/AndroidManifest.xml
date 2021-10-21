@@ -29,7 +29,7 @@
         </activity>
 
         <activity
-            android:name="c.bmartinez.yelpclone.presentation.ui.views.splash.SplashScreen"
+            android:name="c.bmartinez.yelpclone.presentation.splash_screen.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true"
             android:screenOrientation="portrait">

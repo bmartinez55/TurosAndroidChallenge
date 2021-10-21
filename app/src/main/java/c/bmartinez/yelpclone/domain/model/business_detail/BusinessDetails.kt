@@ -1,10 +1,11 @@
 package c.bmartinez.yelpclone.domain.model.business_detail
 
 import c.bmartinez.yelpclone.data.remote.dto.business_details.*
+import c.bmartinez.yelpclone.data.remote.dto.common_dtos.CategoriesDto
 import com.google.gson.annotations.SerializedName
 
 data class BusinessDetails(
-    val categoryDtos: List<CategoryDto>,
+    val categories: List<CategoriesDto>,
     val displayPhone: String,
     val hours: List<HourDto>,
     val id: String,

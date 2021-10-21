@@ -1,7 +1,6 @@
 package c.bmartinez.yelpclone.utils
 
 import android.annotation.SuppressLint
-import c.bmartinez.yelpclone.data.model.BusinessHours
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -30,15 +29,15 @@ fun getCurrentTime(): String {
     return offsetFromUtc.toString()
 }
 
-@SuppressLint("NewApi")
-fun checkCurrentTimeInRange(timeSlot: BusinessHours): Boolean {
-    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.US)
-
-    val currentTime = getCurrentTime()
-    val startTime = Date(currentTime)
-    val endTime = Date(timeSlot.end)
-    val difference = endTime.time - startTime.time
-    return difference > 0
-}
+//@SuppressLint("NewApi")
+//fun checkCurrentTimeInRange(timeSlot: BusinessHours): Boolean {
+//    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.US)
+//
+//    val currentTime = getCurrentTime()
+//    val startTime = Date(currentTime)
+//    val endTime = Date(timeSlot.end)
+//    val difference = endTime.time - startTime.time
+//    return difference > 0
+//}
 
 //fun getRemainingTimeUponClosing()

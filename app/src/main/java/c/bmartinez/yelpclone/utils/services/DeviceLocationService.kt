@@ -9,8 +9,8 @@ import android.os.IBinder
 import android.os.Looper
 import android.util.Log
 import c.bmartinez.yelpclone.utils.LocationUtils
-import c.bmartinez.yelpclone.utils.REQUEST_LOCATION_INTERVAL
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.YelpConstants
 import com.google.android.gms.location.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -24,12 +24,14 @@ class DeviceLocationService: Service() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
+    private lateinit var context: Context
 
     override fun onCreate() {
         super.onCreate()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        context = this
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-        CoroutineScope(IO).launch { getLastLocation(applicationContext) }
+        CoroutineScope(IO).launch { getLastLocation(context) }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -56,6 +58,8 @@ class DeviceLocationService: Service() {
                             if(location == null){
                                 getNewLocation()
                             } else {
+                                Log.d(TAG, "Inside getLastLocation()...")
+                                Log.d(TAG, "Latitude: ${location.latitude} Longitude: ${location.longitude}")
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LAT, location.latitude.toFloat())
                                 SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LONG, location.longitude.toFloat())
                             }
@@ -75,15 +79,17 @@ class DeviceLocationService: Service() {
     private fun getNewLocation() {
         locationRequest = LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = REQUEST_LOCATION_INTERVAL
+        locationRequest.interval = YelpConstants.REQUEST_LOCATION_INTERVAL
         locationRequest.fastestInterval = 0
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
     private val locationCallback = object: LocationCallback() {
         override fun onLocationResult(location: LocationResult) {
-            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LAT, location.lastLocation.latitude.toFloat())
-            SharedPreferencesUtils.setFloatPref(applicationContext, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LONG, location.lastLocation.longitude.toFloat())
+            Log.d(TAG, "Inside locationCallback()...")
+            Log.d(TAG, "Latitude: ${location.lastLocation.latitude} Longitude: ${location.lastLocation.longitude}")
+            SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LAT, location.lastLocation.latitude.toFloat())
+            SharedPreferencesUtils.setFloatPref(context, SharedPreferencesUtils.COORDINATES_SPF, SharedPreferencesUtils.COORDINATES_LONG, location.lastLocation.longitude.toFloat())
         }
     }
 }

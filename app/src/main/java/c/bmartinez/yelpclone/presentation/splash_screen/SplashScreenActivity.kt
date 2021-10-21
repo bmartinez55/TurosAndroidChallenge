@@ -5,17 +5,26 @@ import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
+import c.bmartinez.yelpclone.presentation.MainActivity
+import c.bmartinez.yelpclone.presentation.splash_screen.components.SplashImage
 import c.bmartinez.yelpclone.utils.LocationUtils
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.services.DeviceLocationService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SplashScreenActivity: AppCompatActivity() {
+@AndroidEntryPoint
+class SplashScreenActivity: ComponentActivity() {
 
     val TAG = SplashScreenActivity::class.java.name
 
@@ -27,10 +36,17 @@ class SplashScreenActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //SplashParentLayout()
+            Column (
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                Arrangement.Center,
+                Alignment.CenterHorizontally
+            ) {
+                SplashImage()
+            }
         }
         Log.d(TAG, "Inside onCreate()")
-
     }
 
     override fun onResume() {
@@ -51,11 +67,11 @@ class SplashScreenActivity: AppCompatActivity() {
             MY_PERMISSIONS_REQUEST_LOCATION -> {
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if(LocationUtils().checkLocationPermissions(this)) {
-                        //startMainActivity(true)
+                        CoroutineScope(IO).launch { startMainActivity(true) }
                     }
                 } else {
                     Toast.makeText(this, "Permission Denied: certain features will not work properly", Toast.LENGTH_SHORT).show()
-                    //startMainActivity(false)
+                    CoroutineScope(IO).launch { startMainActivity(false) }
                 }
             }
         }
@@ -72,19 +88,22 @@ class SplashScreenActivity: AppCompatActivity() {
                 )
             }
         } else {
-            //CoroutineScope(IO).launch { startMainActivity(true) }
+            CoroutineScope(IO).launch { startMainActivity(true) }
         }
     }
 
-//    private fun startMainActivity(permissionGranted: Boolean){
-//        Log.d(TAG, "Before switching to MainActivity")
-//
-//        if(permissionGranted){ SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 1) }
-//        else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils().LOCATION_PERMISSION_SPF, SharedPreferencesUtils().LOCATION_GRANTED, 0)}
-//
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//        startActivity(intent)
-//        finish()
-//    }
+    private suspend fun startMainActivity(permissionGranted: Boolean){
+        Log.d(TAG, "Before switching to MainActivity")
+
+        if(permissionGranted){
+            startService(Intent(this, DeviceLocationService::class.java))
+            SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils.LOCATION_PERMISSION_SPF, SharedPreferencesUtils.LOCATION_GRANTED, 1)
+        }
+        else { SharedPreferencesUtils.setIntegerPref(applicationContext, SharedPreferencesUtils.LOCATION_PERMISSION_SPF, SharedPreferencesUtils.LOCATION_GRANTED, 0)}
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+    }
 }
