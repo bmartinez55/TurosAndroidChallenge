@@ -1,0 +1,71 @@
+; Copyright (c) 2004 Lenovo
+;
+; VPC.INF  --  This file contains descriptions for the Virtual Power Controller
+;			   in EC.
+;
+; You may need to modify this file as appropriate for your device.
+;
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+CatalogFile=AcpiVpc.cat
+Provider=%PROVIDER%
+DriverVer=10/11/2018,%ACPIVPC.Version% 
+
+[SourceDisksNames]
+1 = %InstallDisk%
+
+[SourceDisksFiles]
+AcpiVpc.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[ControlFlags]
+;
+; Exclude all devices from Select Device list
+;
+ExcludeFromSelect = *
+
+[Manufacturer]
+%PROVIDER%=Lenovo,ntamd64
+
+[Lenovo.ntamd64]
+%*vpc2004noymc.DeviceDesc% = ACPIVPC_Inst_NoYMC,ACPI\VEN_VPC&DEV_2004
+
+;
+; Vpc (wdm)
+;
+
+[ACPIVPC_Inst_NoYMC.ntamd64]
+CopyFiles = @AcpiVpc.sys
+
+[ACPIVPC_Inst_NoYMC.ntamd64.Services]
+AddService = ACPIVPC,%SPSVCINST_ASSOCSERVICE%,ACPIVPC_Service_Inst
+
+[ACPIVPC_Service_Inst]
+DisplayName    = %ACPIVPC.SvcDesc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\AcpiVpc.sys
+
+
+; =================  Coinstaller installation =====================
+
+
+[strings]
+InstallDisk	      = "Lenove EnergyCut Setup Disk"
+PROVIDER              = "Lenovo"
+*vpc2004noymc.DeviceDesc   = "Lenovo ACPI-Compliant Virtual Power Controller"
+ACPIVPC.SvcDesc       = "Lenovo Virtual Power Controller Driver"
+ACPIVPC.Version="15.11.28.190"
+
+SPSVCINST_ASSOCSERVICE= 0x00000002
+SERVICE_KERNEL_DRIVER = 1
+SERVICE_SYSTEM_START  = 1
+SERVICE_AUTO_START	  = 2
+SERVICE_DEMAND_START  = 3
+SERVICE_ERROR_NORMAL  = 1
+

@@ -2,20 +2,23 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "c.bmartinez.turosandroidchallenge"
-        minSdkVersion 21
+        applicationId "c.bmartinez.yelpclone"
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -32,22 +35,34 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0-alpha04"
+    }
+    dataBinding {
+        enabled = true
+    }
+    hilt {
+        enableExperimentalClasspathAggregation = true
     }
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "com.google.android.gms:play-services-location:18.0.0"
+
+    //DataBinding
+    //kapt "com.android.databinding:compiler:$gradle_version"
 
     // Networking
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -56,14 +71,51 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
     //Coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //viewModel
     implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //Compose
+    implementation 'androidx.compose.ui:ui:1.0.4'
+    implementation 'androidx.compose.ui:ui-tooling:1.0.4'
+    implementation 'androidx.compose.foundation:foundation:1.0.4'
+    implementation 'androidx.compose.material:material:1.0.4'
+    implementation 'androidx.compose.material:material-icons-core:1.0.4'
+    implementation 'androidx.compose.material:material-icons-extended:1.0.4'
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01"
+    implementation 'androidx.compose.runtime:runtime-livedata:1.0.4'
+    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.4'
+    implementation "androidx.compose.compiler:compiler:1.1.0-alpha06"
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
+
+    //Kotlin Navigation
+    def nav_version = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Hilt
+    def hilt_version = "2.38.1"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Hilt ViewModel and Compose
+    def hilt_vm_version = "1.0.0-alpha03"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_vm_version"
+    implementation "androidx.hilt:hilt-navigation-compose:$hilt_vm_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_vm_version"
+}
+
+//Allows references to generated code
+kapt {
+    correctErrorTypes = true
 }

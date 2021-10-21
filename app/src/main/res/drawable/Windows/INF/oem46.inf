@@ -1,0 +1,125 @@
+; ################################################################
+;
+;   HP_27f.inf        
+;
+;   Ver. 1.0.0.0
+;
+;   Copyright (c)2017, HP Development Company, L.P.
+;   All Rights Reserved
+;
+;   This is a Microsoft Windows x86/x64 setup information file
+;   for the HP 27f Display.
+; 
+; ################################################################
+
+[Version]
+signature="$WINDOWS NT$"
+Class=Monitor
+ClassGuid={4D36E96E-E325-11CE-BFC1-08002BE10318}
+Provider=%HP%
+CatalogFile=HP_27f.cat
+DriverVer=09/18/2017,1.0.0.0
+PnpLockDown=1
+
+[ControlFlags]
+ExcludeFromSelect = MONITOR\HPN354A
+ExcludeFromSelect = MONITOR\HPN354B
+ExcludeFromSelect = MONITOR\HPN354C
+
+[SourceDisksNames]
+1=%Disk%,,,
+
+[SourceDisksFiles]
+HP_27f.icm=1
+
+[DestinationDirs]
+DefaultDestDir=12
+27f.CopyFiles=23
+
+[Manufacturer]
+%HP%=HP,NTx86,NTamd64
+
+[HP]
+%27f_H1%=27f_H1.Install, Monitor\HPN354A
+%27f_H2%=27f_H2.Install, Monitor\HPN354B
+%27f_A%=27f_A.Install, Monitor\HPN354C
+
+[HP.NTx86]
+%27f_H1%=27f_H1.Install, Monitor\HPN354A
+%27f_H2%=27f_H2.Install, Monitor\HPN354B
+%27f_A%=27f_A.Install, Monitor\HPN354C
+
+[HP.NTamd64]
+%27f_H1%=27f_H1.Install, Monitor\HPN354A
+%27f_H2%=27f_H2.Install, Monitor\HPN354B
+%27f_A%=27f_A.Install, Monitor\HPN354C
+
+[27f_H1.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=27f_H1.AddReg, 1920, DPMS
+CopyFiles=27f.CopyFiles
+
+[27f_H2.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=27f_H2.AddReg, 1920, DPMS
+CopyFiles=27f.CopyFiles
+
+[27f_A.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=27f_A.AddReg, 1920, DPMS
+CopyFiles=27f.CopyFiles
+
+[DEL_CURRENT_REG]
+HKR,MODES
+HKR,,MaxResolution
+HKR,,DPMS
+HKR,,ICMProfile
+
+[1920]
+HKR,,MaxResolution,,"1920,1080"
+
+[DPMS]
+HKR,,DPMS,,1
+
+[27f_H1.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"30-86,48-75,+,-"
+HKR,,PreferredMode,,"1920,1080,60"
+HKR,,ICMProfile,0,"HP_27f.icm"
+
+[27f_H2.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"30-86,48-75,+,-"
+HKR,,PreferredMode,,"1920,1080,60"
+HKR,,ICMProfile,0,"HP_27f.icm"
+
+[27f_A.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"30-80,50-60,+,+"
+HKR,,PreferredMode,,"1920,1080,60"
+HKR,,ICMProfile,0,"HP_27f.icm"
+
+[27f.CopyFiles]
+HP_27f.icm
+
+[27f_H1.Install.Services]                                                                           
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%, Monitor_Service.Install
+[27f_H2.Install.Services]                                                                           
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%, Monitor_Service.Install
+[27f_A.Install.Services]
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%, Monitor_Service.Install
+
+[Monitor_Service.Install]
+DisplayName    = %Monitor.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\monitor.sys         
+
+[Strings] 
+SPSVCINST_ASSOCSERVICE = 0x00000002
+Monitor.SVCDESC="Microsoft Monitor Class Function Driver Service"
+
+HP="HP"
+MonitorClassName="Monitor"
+27f_H1="HP 27f Display"
+27f_H2="HP 27f Display"
+27f_A="HP 27f Display"
+Disk="HP 27f Driver Software"

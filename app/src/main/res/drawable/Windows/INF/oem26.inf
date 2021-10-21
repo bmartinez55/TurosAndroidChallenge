@@ -1,0 +1,302 @@
+; ************************************************************
+; ************************************************************
+; **  Filename: SunrisePoint-LPSystem.inf                   **
+; **  Abstract: Assigns the null driver to devices          **
+; **            for yellow-bang removal and                 **
+; **            brands Intel(R) devices                     ** 
+; ************************************************************
+; ************************************************************
+
+[Version]
+Signature=$WINDOWS NT$
+Class=System
+ClassGUID={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%INTEL%
+CatalogFile=SunrisePoint-LP.cat
+DriverVer=10/28/2015, 10.1.1.13
+
+[SourceDisksNames]
+
+[SourceDisksFiles]
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[PackageInfo]
+Name=Chipset
+
+[Manufacturer]
+%INTEL%=INTEL,NT,NTamd64,NT.6.1,NTamd64.6.1,NT.6.3.1,NTamd64.6.3.1
+
+[INTEL.NT]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+
+[INTEL.NT.6.1]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D27Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D27
+%PCI\VEN_8086&DEV_9D28Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D28
+%PCI\VEN_8086&DEV_9D29Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D29
+%PCI\VEN_8086&DEV_9D2ADesc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D2A
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+%PCI\VEN_8086&DEV_9D60Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D60
+%PCI\VEN_8086&DEV_9D61Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D61
+%PCI\VEN_8086&DEV_9D62Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D62
+%PCI\VEN_8086&DEV_9D63Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D63
+%PCI\VEN_8086&DEV_9D64Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D64
+%PCI\VEN_8086&DEV_9D65Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D65
+%PCI\VEN_8086&DEV_9D66Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D66
+%ACPI\INT3446Desc%=Needs_NO_DRV, ,ACPI\INT3446
+%ACPI\INT3447Desc%=Needs_NO_DRV, ,ACPI\INT3447
+%ACPI\INT344BDesc%=Needs_NO_DRV, ,ACPI\INT344B
+
+[INTEL.NT.6.3.1]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+
+[INTEL.NTamd64]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+
+[INTEL.NTamd64.6.1]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D27Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D27
+%PCI\VEN_8086&DEV_9D28Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D28
+%PCI\VEN_8086&DEV_9D29Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D29
+%PCI\VEN_8086&DEV_9D2ADesc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D2A
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+%PCI\VEN_8086&DEV_9D60Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D60
+%PCI\VEN_8086&DEV_9D61Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D61
+%PCI\VEN_8086&DEV_9D62Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D62
+%PCI\VEN_8086&DEV_9D63Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D63
+%PCI\VEN_8086&DEV_9D64Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D64
+%PCI\VEN_8086&DEV_9D65Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D65
+%PCI\VEN_8086&DEV_9D66Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D66
+%ACPI\INT3446Desc%=Needs_NO_DRV, ,ACPI\INT3446
+%ACPI\INT3447Desc%=Needs_NO_DRV, ,ACPI\INT3447
+%ACPI\INT344BDesc%=Needs_NO_DRV, ,ACPI\INT344B
+
+[INTEL.NTamd64.6.3.1]
+%PCI\VEN_8086&DEV_9D10Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D10
+%PCI\VEN_8086&DEV_9D11Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D11
+%PCI\VEN_8086&DEV_9D12Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D12
+%PCI\VEN_8086&DEV_9D13Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D13
+%PCI\VEN_8086&DEV_9D14Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D14
+%PCI\VEN_8086&DEV_9D15Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D15
+%PCI\VEN_8086&DEV_9D16Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D16
+%PCI\VEN_8086&DEV_9D17Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D17
+%PCI\VEN_8086&DEV_9D18Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D18
+%PCI\VEN_8086&DEV_9D19Desc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D19
+%PCI\VEN_8086&DEV_9D1ADesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1A
+%PCI\VEN_8086&DEV_9D1BDesc%=Needs_PCI_DRV,PCI\VEN_8086&DEV_9D1B
+%PCI\VEN_8086&DEV_9D21Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D21
+%PCI\VEN_8086&DEV_9D23Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D23
+%PCI\VEN_8086&DEV_9D24Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D24
+%PCI\VEN_8086&DEV_9D26Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D26
+%PCI\VEN_8086&DEV_9D30Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D30
+%PCI\VEN_8086&DEV_9D31Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D31
+%PCI\VEN_8086&DEV_9D35Desc%=Needs_NO_DRV, ,PCI\VEN_8086&DEV_9D35
+%PCI\VEN_8086&DEV_9D41Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D41
+%PCI\VEN_8086&DEV_9D43Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D43
+%PCI\VEN_8086&DEV_9D46Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D46
+%PCI\VEN_8086&DEV_9D48Desc%=Needs_ISAPNP_DRV,PCI\VEN_8086&DEV_9D48
+
+[Needs_PCI_DRV]
+Include=machine.inf
+Needs=PCI_DRV
+
+[Needs_PCI_DRV.Services]
+Include=machine.inf
+Needs=PCI_DRV.Services
+
+[Needs_PCI_DRV.HW]
+Include=machine.inf
+Needs=PCI_DRV.HW
+
+[Needs_NO_DRV]
+Include=machine.inf
+Needs=NO_DRV
+
+[Needs_NO_DRV.Services]
+Include=machine.inf
+Needs=NO_DRV.Services
+
+[Needs_ISAPNP_DRV]
+Include=machine.inf
+Needs=ISAPNP_DRV
+
+[Needs_ISAPNP_DRV.Services]
+Include=machine.inf
+Needs=ISAPNP_DRV.Services
+
+[Strings]
+INTEL="INTEL"
+PCI\VEN_8086&DEV_9D10Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #1 - 9D10"
+PCI\VEN_8086&DEV_9D11Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #2 - 9D11"
+PCI\VEN_8086&DEV_9D12Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #3 - 9D12"
+PCI\VEN_8086&DEV_9D13Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #4 - 9D13"
+PCI\VEN_8086&DEV_9D14Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #5 - 9D14"
+PCI\VEN_8086&DEV_9D15Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #6 - 9D15"
+PCI\VEN_8086&DEV_9D16Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #7 - 9D16"
+PCI\VEN_8086&DEV_9D17Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #8 - 9D17"
+PCI\VEN_8086&DEV_9D18Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #9 - 9D18"
+PCI\VEN_8086&DEV_9D19Desc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #10 - 9D19"
+PCI\VEN_8086&DEV_9D1ADesc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #11 - 9D1A"
+PCI\VEN_8086&DEV_9D1BDesc="Mobile 6th Generation Intel(R) Processor Family I/O PCI Express Root Port #12 - 9D1B"
+PCI\VEN_8086&DEV_9D21Desc="Mobile 6th Generation Intel(R) Processor Family I/O PMC - 9D21"
+PCI\VEN_8086&DEV_9D23Desc="Mobile 6th Generation Intel(R) Processor Family I/O SMBUS - 9D23"
+PCI\VEN_8086&DEV_9D24Desc="Mobile 6th Generation Intel(R) Processor Family I/O SPI Controller - 9D24"
+PCI\VEN_8086&DEV_9D26Desc="Mobile 6th Generation Intel(R) Processor Family I/O Northpeak - 9D26"
+PCI\VEN_8086&DEV_9D27Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO UART Host Controller - 9D27"
+PCI\VEN_8086&DEV_9D28Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO UART Host Controller - 9D28"
+PCI\VEN_8086&DEV_9D29Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO SPI Host Controller - 9D29"
+PCI\VEN_8086&DEV_9D2ADesc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO SPI Host Controller - 9D2A"
+PCI\VEN_8086&DEV_9D30Desc="Mobile 6th Generation Intel(R) Processor Family I/O USB Device Controller (OTG) - 9D30"
+PCI\VEN_8086&DEV_9D31Desc="Mobile 6th Generation Intel(R) Processor Family I/O Thermal subsystem - 9D31"
+PCI\VEN_8086&DEV_9D35Desc="Mobile 6th Generation Intel(R) Processor Family I/O Integrated Sensor Hub - 9D35"
+PCI\VEN_8086&DEV_9D41Desc="Mobile 6th Generation Intel(R) Processor Family I/O LPC Controller (Engineering Sample) - 9D41"
+PCI\VEN_8086&DEV_9D43Desc="Mobile 6th Generation Intel(R) Processor Family I/O LPC Controller (Baseline SKU) - 9D43"
+PCI\VEN_8086&DEV_9D46Desc="Mobile 6th Generation Intel(R) Processor Family I/O LPC Controller (Premium SKU) - 9D46"
+PCI\VEN_8086&DEV_9D48Desc="Mobile 6th Generation Intel(R) Processor Family I/O LPC Controller (Premium SKU) - 9D48"
+PCI\VEN_8086&DEV_9D60Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D60"
+PCI\VEN_8086&DEV_9D61Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D61"
+PCI\VEN_8086&DEV_9D62Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D62"
+PCI\VEN_8086&DEV_9D63Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D63"
+PCI\VEN_8086&DEV_9D64Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D64"
+PCI\VEN_8086&DEV_9D65Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 9D65"
+PCI\VEN_8086&DEV_9D66Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO UART Host Controller - 9D66"
+ACPI\INT3446Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 3446"
+ACPI\INT3447Desc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO I2C Host Controller - 3447"
+ACPI\INT344BDesc="Mobile 6th Generation Intel(R) Processor Family I/O Serial IO GPIO Host Controller - 344B"
+
+
+
+
+; Copyright (c) 2003-2015 Intel Corporation
+; 
+; ********************************************************************************
+; Intel is making no claims of usability, efficacy or warranty.
+; ********************************************************************************
+; Information in this document is provided in connection with Intel products. No
+; license, express or implied, by estoppel or otherwise, to any intellectual
+; property rights is granted by this document. Intel assumes no liability
+; whatsoever, and Intel disclaims any express or implied warranty, relating to
+; sale and/or use of Intel products including liability or warranties relating to
+; fitness for a particular purpose, merchantability, or infringement of any
+; patent, copyright or other intellectual property right. Intel products are not
+; intended for use in medical, life saving, or life sustaining applications.
+; ********************************************************************************
+; Intel Corporation disclaims all warranties and liabilities for the use of this
+; document and the information contained herein, and assumes no responsibility for
+; any errors which may appear in this document, nor does Intel make a commitment
+; to update the information contained herein. Intel reserves the right to make
+; changes to this document at any time, without notice.
+; ********************************************************************************
+; ********************************************************************************
+; 
+; * Third-party brands and names are the property of their respective owners.

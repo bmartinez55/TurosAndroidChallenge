@@ -1,0 +1,116 @@
+;
+; WirelessKeyboardFilter.inf
+;
+; Copyright (c) Microsoft Corporation. All rights reserved
+;
+
+[Version]
+Signature="$Windows NT$"
+ClassGUID={4D36E96B-E325-11CE-BFC1-08002BE10318}
+Class=Keyboard
+Provider=%ManufacturerName%
+CatalogFile=WirelessKeyboardFilter.cat
+PnPLockDown=1
+
+DriverVer = 02/08/2018,1.0.104.0
+
+[DestinationDirs]
+DefaultDestDir   = 12
+;
+; Driver information
+;
+;************************************************************
+; Install Section
+;************************************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+
+;========= English/Global Devices
+%WirelessKeyboardFilter.DeviceDesc% = WirelessKeyboardFilter, HID\VID_045E&PID_07B1&MI_00
+%WirelessKeyboardFilter.DeviceDesc% = WirelessKeyboardFilter, HID\VID_045E&PID_07B2&MI_00
+%WirelessKeyboardFilter.DeviceDesc% = WirelessKeyboardFilter, HID\VID_045E&PID_07A5&MI_00
+%WirelessKeyboardFilter.DeviceDesc% = WirelessKeyboardFilter, HID\VID_045E&PID_0745&MI_00
+
+;************************************************************
+; General installation section
+;************************************************************
+
+;========= English/Global section =========
+[WirelessKeyboardFilter.NT]
+; perform port related actions from keyboard.inf
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT
+; Copy the driver over
+CopyFiles=WirelessKeyboardFilter.CopyFiles
+
+;************************************************************
+; File sections
+;************************************************************
+[WirelessKeyboardFilter.CopyFiles]
+WirelessKeyboardFilter.sys
+
+;************************************************************
+; Service Installation
+;************************************************************
+
+;========= English/Global Services section =========
+[WirelessKeyboardFilter.NT.Services]
+AddService = WirelessKeyboardFilter,  , kbfilter_Service_Inst
+; Install the port driver and mouclass from keyboard.inf
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT.Services
+
+;========= English/Global HW section =========
+[WirelessKeyboardFilter.NT.HW]
+; Add the device upper filter
+AddReg = WirelessKeyboardFilter.HW.AddReg
+; run the directives need by the port driver
+Include = keyboard.inf
+Needs    = HID_Keyboard_Inst.NT.HW
+
+[kbfilter_Service_Inst]
+DisplayName    = %WirelessKeyboardFilter.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\WirelessKeyboardFilter.sys
+
+[WirelessKeyboardFilter.HW.AddReg]
+HKR,,"UpperFilters",0x00010000,"WirelessKeyboardFilter"
+
+
+;************************************************************
+; Source file information
+;************************************************************
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+WirelessKeyboardFilter.sys = 1,,
+
+;************************************************************
+; Strings
+;************************************************************
+
+[Strings]
+;
+; Non-Localizable Strings
+;
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+;
+; Localizable Strings
+;
+DiskId1="WDS Base Driver Installation Disk"
+WirelessKeyboardFilter.DeviceDesc = "Wireless Keyboard Filter Device"
+WirelessKeyboardFilter.SvcDesc = "Wireless Keyboard Filter Device Service"
+ManufacturerName="Surface"

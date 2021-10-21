@@ -1,0 +1,99 @@
+
+;----------------------------------------------------------------------------
+; SynHidI2c.inf
+;
+; Installs Synaptics HidI2c driver on 64-bit Windows 7  
+; Copyright (c) 1996-2016, Synaptics Incorporated
+;----------------------------------------------------------------------------
+
+[version]
+signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%Provider%
+CatalogFile=SynTP.cat
+DriverVer=03/04/2016, 19.0.17.72
+
+;----------------------------------------------------------------------------
+; Source disk
+;----------------------------------------------------------------------------
+[SourceDisksNames]
+1=%DiskName%,,
+
+[SourceDisksFiles]
+SynHidI2c.sys = 1
+
+[DestinationDirs]
+DefaultDestDir        = 12 ; Drivers directory
+CopyFiles_Drivers     = 12 ; Drivers directory
+
+; Drivers directory
+[CopyFiles_Drivers]
+SynHidI2c.sys,,,0x00000001
+
+;----------------------------------------------------------------------------
+; Manufacturer section
+;----------------------------------------------------------------------------
+[Manufacturer]
+%SynMfg% = SynHidI2c, NTx86, NTamd64.6.1, NTamd64.6.2
+
+; x64 Windows 7
+[SynHidI2c.NTamd64.6.1]
+
+%SynHidI2c.DeviceDesc% = SynHidI2c, ACPI\SYNA2B2C
+
+[SynHidI2c.NTx86]
+; No support
+
+[SynHidI2c.NTamd64.6.2]
+; No support
+
+;----------------------------------------------------------------------------
+;  SynHidI2c - Common
+;----------------------------------------------------------------------------
+[SynHidI2c.NT]
+CopyFiles=CopyFiles_Drivers
+AddReg=SynHidI2CInstall_Addreg
+
+[SynHidI2c.NT.HW]
+AddReg=SynHidI2c.NT.HW.AddReg
+
+[SynHidI2c.NT.HW.AddReg]
+HKR,,"UpperFilters",0x00010000,mshidkmdf
+
+[SynHidI2c.NT.Services]
+AddService=SynHidI2c,0x00000002,SynHidI2cServiceInst,SynHidI2cEventLogInst
+
+[SynHidI2cEventLogInst]
+AddReg=SynHidI2cEventLogAddReg
+
+[SynHidI2cEventLogAddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\SynHidI2c.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[SynHidI2CInstall_Addreg]
+HKLM,Software\Synaptics\SynHidI2C,InstallDir,0x00000000,"%1%"
+HKLM,Software\Synaptics\SynHidI2C,DriverVersion,0x00000000,"19.0.17.72"
+
+;----------------------------------------------------------------------------
+; SynHidI2c - Touch Driver install section
+;----------------------------------------------------------------------------
+[SynHidI2cServiceInst]
+DisplayName    = %SynHidI2c.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ;
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SynHidI2c.sys
+LoadOrderGroup = Extended Base
+
+;----------------------------------------------------------------------------
+; Strings
+;----------------------------------------------------------------------------
+[Strings]
+Publisher = "Synaptics Incorporated"
+Provider = "Synaptics"
+SynMfg = "Synaptics"
+
+DiskName = "Synaptics(R) I²C Miniport Installation Disk"
+SynHidI2c.DeviceDesc="Synaptics(R) I²C Miniport"
+SynHidI2c.SVCDESC="Synaptics(R) I²C Miniport"
