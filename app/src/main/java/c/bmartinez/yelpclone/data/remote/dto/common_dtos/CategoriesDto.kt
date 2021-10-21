@@ -1,4 +1,4 @@
-package c.bmartinez.yelpclone.data.remote.dto.business_search
+package c.bmartinez.yelpclone.data.remote.dto.common_dtos
 
 data class CategoriesDto(
     val alias: String,

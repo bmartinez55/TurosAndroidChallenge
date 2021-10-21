@@ -1,15 +1,15 @@
-package c.bmartinez.yelpclone.presentation.main_screen.view_model
+package c.bmartinez.yelpclone.presentation.search_list_screen.view_model
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import c.bmartinez.yelpclone.domain.use_case.get_popular_locations.GetPopularLocationsUseCase
+import c.bmartinez.yelpclone.domain.use_case.get_search_businesses.GetSearchBusinessesUseCase
 import c.bmartinez.yelpclone.utils.Resource
 import c.bmartinez.yelpclone.utils.SharedPreferencesUtils
+import c.bmartinez.yelpclone.utils.YelpConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.launchIn
@@ -17,18 +17,19 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor(
-    private val getPopularLocationsUseCase: GetPopularLocationsUseCase,
+class SearchListViewModel @Inject constructor(
+    private val getSearchBusinessesUseCase: GetSearchBusinessesUseCase,
     @ApplicationContext context: Context,
     savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
-    private val _state = mutableStateOf(MainScreenState())
-    val state: State<MainScreenState> = _state
+    private val _state = mutableStateOf(SearchListState())
+    val state: State<SearchListState> = _state
 
     val queryTerm = mutableStateOf("")
 
     init {
+        queryTerm.value = savedStateHandle.get<String>(YelpConstants.PARAM_KEY_SEARCH_TERM) ?: ""
         val latitude = SharedPreferencesUtils.getFloatPref(
             context,
             SharedPreferencesUtils.COORDINATES_SPF,
@@ -45,22 +46,34 @@ class MainScreenViewModel @Inject constructor(
 
         latitude?.let { resultLatitude ->
             longitude?.let { resultLongitude ->
-                getPopularLocations(resultLatitude, resultLongitude)
+                getSearchBusinesses(
+                    queryTerm.value,
+                    resultLatitude,
+                    resultLongitude
+                )
             }
         }
     }
 
-    private fun getPopularLocations(latitude: Double, longitude: Double) {
-        getPopularLocationsUseCase(latitude = latitude, longitude = longitude).onEach { result ->
+    fun getSearchBusinesses(
+        searchTerm: String,
+        latitude: Double,
+        longitude: Double
+    ) {
+        getSearchBusinessesUseCase(
+            searchTerm,
+            latitude,
+            longitude
+        ).onEach { result ->
             when(result) {
                 is Resource.Success -> {
-                    _state.value = result.data?.let { MainScreenState(businesses = it.businesses) }!!
+                    _state.value = result.data?.let { SearchListState(businesses = it.businesses) }!!
                 }
                 is Resource.Error -> {
-                    _state.value = MainScreenState(error = result.message ?: "An unexpected error occurred.")
+                    _state.value = SearchListState(error = result.message ?: "An unexpected error occurred.")
                 }
                 is Resource.Loading -> {
-                    _state.value = MainScreenState(isLoading = true)
+                    _state.value = SearchListState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)

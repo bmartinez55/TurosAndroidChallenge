@@ -12,7 +12,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetBusinessDetailsUseCase@Inject constructor(
+class GetBusinessDetailsUseCase @Inject constructor(
     private val businessRepository: BusinessRepository
 ) {
     operator fun invoke(businessId: String): Flow<Resource<BusinessDetails>> = flow {

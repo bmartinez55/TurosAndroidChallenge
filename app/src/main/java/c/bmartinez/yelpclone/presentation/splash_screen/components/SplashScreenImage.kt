@@ -1,30 +1,13 @@
-package c.bmartinez.yelpclone.presentation.ui.views.splash
+package c.bmartinez.yelpclone.presentation.splash_screen.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import c.bmartinez.yelpclone.R
 
-@Preview(showSystemUi = true)
-@ExperimentalFoundationApi
-@Composable
-fun SplashParentLayout() {
-    Column (
-        Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
-        Arrangement.Center,
-        Alignment.CenterHorizontally
-    ) {
-        SplashImage()
-    }
-}
 
 @Composable
 fun SplashImage() {

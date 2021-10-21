@@ -12,4 +12,10 @@ interface BusinessRepository {
     ): BusinessSearchDto
 
     suspend fun getBusinessDetails(businessId: String): BusinessDetailsDto
+
+    suspend fun getSearchBusinesses(
+        searchTerm: String,
+        latitude: Double,
+        longitude: Double
+    ): BusinessSearchDto
 }

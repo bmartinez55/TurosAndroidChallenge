@@ -1,11 +1,12 @@
 package c.bmartinez.yelpclone.data.remote.dto.business_details
 
+import c.bmartinez.yelpclone.data.remote.dto.common_dtos.CategoriesDto
 import c.bmartinez.yelpclone.domain.model.business_detail.BusinessDetails
 import com.google.gson.annotations.SerializedName
 
 data class BusinessDetailsDto(
     val alias: String,
-    val category: List<CategoryDto>,
+    val categories: List<CategoriesDto>,
     val coordinates: CoordinatesDto,
     @SerializedName("display_phone") val displayPhone: String,
     val hours: List<HourDto>,
@@ -13,7 +14,7 @@ data class BusinessDetailsDto(
     @SerializedName("image_url")val imageUrl: String,
     @SerializedName("is_claimed") val isClaimed: Boolean,
     @SerializedName("is_closed") val isClosed: Boolean,
-    val location: LocationDto,
+    val detailsLocation: DetailsLocationDto,
     val name: String,
     val phone: String,
     val photos: List<String>,
@@ -27,7 +28,7 @@ data class BusinessDetailsDto(
 
 fun BusinessDetailsDto.toBusinessDetails(): BusinessDetails {
     return BusinessDetails(
-        categoryDtos = category,
+        categories = categories,
         displayPhone = displayPhone,
         hours = hours,
         id = id,

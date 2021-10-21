@@ -84,18 +84,18 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     //Compose
-    implementation 'androidx.compose.ui:ui:1.0.2'
-    implementation 'androidx.compose.ui:ui-tooling:1.0.2'
-    implementation 'androidx.compose.foundation:foundation:1.0.2'
-    implementation 'androidx.compose.material:material:1.0.2'
-    implementation 'androidx.compose.material:material-icons-core:1.0.2'
-    implementation 'androidx.compose.material:material-icons-extended:1.0.2'
+    implementation 'androidx.compose.ui:ui:1.0.4'
+    implementation 'androidx.compose.ui:ui-tooling:1.0.4'
+    implementation 'androidx.compose.foundation:foundation:1.0.4'
+    implementation 'androidx.compose.material:material:1.0.4'
+    implementation 'androidx.compose.material:material-icons-core:1.0.4'
+    implementation 'androidx.compose.material:material-icons-extended:1.0.4'
     implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01'
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01"
-    implementation 'androidx.compose.runtime:runtime-livedata:1.0.2'
-    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.2'
-    implementation "androidx.compose.compiler:compiler:1.1.0-alpha04"
+    implementation 'androidx.compose.runtime:runtime-livedata:1.0.4'
+    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.4'
+    implementation "androidx.compose.compiler:compiler:1.1.0-alpha06"
     implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
 
     //Kotlin Navigation
@@ -108,9 +108,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    //Hilt ViewModel
+    //Hilt ViewModel and Compose
     def hilt_vm_version = "1.0.0-alpha03"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_vm_version"
+    implementation "androidx.hilt:hilt-navigation-compose:$hilt_vm_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_vm_version"
 }
 
