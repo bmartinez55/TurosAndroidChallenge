@@ -12,7 +12,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import c.bmartinez.yelpclone.presentation.search_list_screen.components.SearchRecyclerView
+import c.bmartinez.yelpclone.presentation.search_list_screen.components.SearchList
 import c.bmartinez.yelpclone.presentation.search_list_screen.view_model.SearchListViewModel
 import c.bmartinez.yelpclone.presentation.utils.toolbar.SearchScreenToolBar
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -39,7 +39,7 @@ fun SearchListScreen(
         ) {
             SearchScreenToolBar(viewModel, focusManager, context, navController)
 
-            SearchRecyclerView(state.businesses, navController)
+            SearchList(state.businesses, navController)
         }
     }
 }

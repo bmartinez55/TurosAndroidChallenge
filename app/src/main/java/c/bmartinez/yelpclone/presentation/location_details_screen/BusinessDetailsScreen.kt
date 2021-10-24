@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import c.bmartinez.yelpclone.presentation.location_details_screen.components.BusinessDetailsImage
-import c.bmartinez.yelpclone.presentation.location_details_screen.components.LocationAdditionalInfo
+import c.bmartinez.yelpclone.presentation.location_details_screen.components.BusinessDetailsInfo
 import c.bmartinez.yelpclone.presentation.location_details_screen.view_model.BusinessDetailsViewModel
 
 @Composable
@@ -32,7 +32,7 @@ fun BusinessDetailsScreen(
                 .verticalScroll(verticalScrollState)
         ) {
             BusinessDetailsImage(state.business, navController)
-            LocationAdditionalInfo(state.business)
+            BusinessDetailsInfo(state.business)
         }
     }
 

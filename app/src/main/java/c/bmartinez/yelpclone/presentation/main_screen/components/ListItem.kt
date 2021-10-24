@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 import c.bmartinez.yelpclone.presentation.utils.DisplayStarRating
-import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
-import c.bmartinez.yelpclone.utils.LoadPicture
+import c.bmartinez.yelpclone.utils.loadPicture
+import c.bmartinez.yelpclone.utils.YelpConstants
 
 @Composable
 fun PopularListItem(
@@ -41,7 +41,7 @@ fun PopularListItem(
     ) {
         Column {
             business.imageUrl.let { url ->
-                val image = LoadPicture(url = url, defaultImage = DEFAULT_BUSINESS_IMAGE).value
+                val image = loadPicture(url = url, defaultImage = YelpConstants.DEFAULT_BUSINESS_IMAGE).value
                 image?.let { img ->
                     Image(
                         bitmap = img.asImageBitmap(),

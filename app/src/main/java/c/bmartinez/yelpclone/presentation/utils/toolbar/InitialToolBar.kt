@@ -1,9 +1,7 @@
 package c.bmartinez.yelpclone.presentation.utils.toolbar
 
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -30,68 +28,74 @@ import c.bmartinez.yelpclone.presentation.main_screen.view_model.MainScreenViewM
 fun InitialToolBar(
     viewModel: MainScreenViewModel = hiltViewModel(),
     focusManager: FocusManager,
-    navController: NavController
+    navController: NavController,
+    isLoading: Boolean
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
         ,
         color = Color.White,
-        elevation = 8.dp
+        elevation = 8.dp,
     ){
-        Row(modifier = Modifier.fillMaxWidth()) {
-            val query = viewModel.queryTerm
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth(.9f)
-                    .padding(8.dp)
-                ,
-                value = query.value,
-                onValueChange = { newValue ->
-                    viewModel.onQueryTermChanged(newValue)
-                },
-                label = {
-                    Text(text = "Search")
-                },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Search
-                ),
-                leadingIcon = {
-                    Icon(Icons.Filled.Search, contentDescription = null)
-                },
-                trailingIcon = {
-                    if (query.value != TextFieldValue("").text) {
-                        IconButton(
-                            onClick = {
-                                viewModel.onQueryTermClear()
+        Column{
+            Row(modifier = Modifier.fillMaxWidth()) {
+                val query = viewModel.queryTerm
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth(.9f)
+                        .padding(8.dp)
+                    ,
+                    value = query.value,
+                    onValueChange = { newValue ->
+                        viewModel.onQueryTermChanged(newValue)
+                    },
+                    label = {
+                        Text(text = "Search")
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Search
+                    ),
+                    leadingIcon = {
+                        Icon(Icons.Filled.Search, contentDescription = null)
+                    },
+                    trailingIcon = {
+                        if (query.value != TextFieldValue("").text) {
+                            IconButton(
+                                onClick = {
+                                    viewModel.onQueryTermClear()
+                                }
+                            ) {
+                                Icon(
+                                    Icons.Default.Close,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .padding(15.dp)
+                                        .size(24.dp)
+                                )
                             }
-                        ) {
-                            Icon(
-                                Icons.Default.Close,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .padding(15.dp)
-                                    .size(24.dp)
+                        }
+                    },
+                    keyboardActions = KeyboardActions(
+                        onSearch = {
+                            focusManager.clearFocus(true)
+                            navController.navigate(
+                                Screen.SearchListScreen.route + "/${query.value}"
                             )
                         }
-                    }
-                },
-                keyboardActions = KeyboardActions(
-                    onSearch = {
-                        focusManager.clearFocus(true)
-                        navController.navigate(
-                            Screen.SearchListScreen.route + "/${query.value}"
-                        )
-                    }
-                ),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = MaterialTheme.colors.surface,
-                    cursorColor = Color.Black,
-
                     ),
-                textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
-            )
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = MaterialTheme.colors.surface,
+                        cursorColor = Color.Black,
+
+                        ),
+                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
+                )
+            }
+            if(isLoading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
         }
     }
 }

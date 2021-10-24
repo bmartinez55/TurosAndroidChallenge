@@ -13,4 +13,5 @@ data class Businesses(
     val imageUrl: String,
     val location: SearchLocationDto,
     val distance: Double,
+    val transactions: List<String>
 )

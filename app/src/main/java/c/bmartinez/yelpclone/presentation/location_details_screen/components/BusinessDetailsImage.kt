@@ -20,19 +20,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import c.bmartinez.yelpclone.domain.model.business_detail.BusinessDetails
 import c.bmartinez.yelpclone.presentation.utils.DisplayStarRating
-import c.bmartinez.yelpclone.utils.DEFAULT_BUSINESS_IMAGE
-import c.bmartinez.yelpclone.utils.LOCATION_DETAILS_IMAGE_HEIGHT
-import c.bmartinez.yelpclone.utils.LoadPicture
+import c.bmartinez.yelpclone.utils.loadPicture
+import c.bmartinez.yelpclone.utils.YelpConstants
 
 @Composable
 fun BusinessDetailsImage(location: BusinessDetails?, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(LOCATION_DETAILS_IMAGE_HEIGHT.dp)
+            .height(YelpConstants.BUSINESS_DETAILS_IMAGE_HEIGHT.dp)
     ) {
         location?.imageUrl.let{ url ->
-            val image = LoadPicture(url = url, defaultImage = DEFAULT_BUSINESS_IMAGE).value
+            val image = loadPicture(url = url, defaultImage = YelpConstants.DEFAULT_BUSINESS_IMAGE).value
             image?.let { img ->
                 Image(
                     bitmap = img.asImageBitmap(),
@@ -40,19 +39,10 @@ fun BusinessDetailsImage(location: BusinessDetails?, navController: NavControlle
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(LOCATION_DETAILS_IMAGE_HEIGHT.dp)
+                        .height(YelpConstants.BUSINESS_DETAILS_IMAGE_HEIGHT.dp)
                 )
             }
         }
-//        Image(
-//            painter = painterResource(id = DEFAULT_BUSINESS_IMAGE),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(LOCATION_DETAILS_IMAGE_HEIGHT.dp)
-//            ,
-//            contentScale = ContentScale.Crop
-//        )
 
         Column(
             modifier = Modifier

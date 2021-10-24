@@ -1,5 +1,8 @@
 package c.bmartinez.yelpclone.utils
 
+import androidx.compose.ui.unit.dp
+import c.bmartinez.yelpclone.R
+
 object YelpConstants {
     const val API_KEY = "Zw9OVRIdU_icHgdMY9j2QlR5-asI_bHSlf39eFcniPuE1Bz4_1q-U7fJm9JpUvJwRTHcHXFi4lAXbRnLUrRaHvgXlC2LlzPurFds6bEpQq1_OG8tCQJ9kTmCGKkJYXYx"
     const val BASE_URL = "https://api.yelp.com/v3/"
@@ -13,4 +16,9 @@ object YelpConstants {
     //Saved State Handle Parameter Keys
     const val PARAM_KEY_BUSINESS_ID = "businessId"
     const val PARAM_KEY_SEARCH_TERM = "searchTerm"
+
+    //Image related values
+    const val IMAGE_SIZE_ITEM = 150
+    const val BUSINESS_DETAILS_IMAGE_HEIGHT = 260
+    const val DEFAULT_BUSINESS_IMAGE = R.drawable.temp_business_icon
 }
