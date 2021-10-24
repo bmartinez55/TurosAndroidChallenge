@@ -17,14 +17,14 @@ import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 //Parent Recycler View that holds nested Lazy Rows or Columns
 @ExperimentalFoundationApi
 @Composable
-fun ParentFragRecyclerView(
+fun ParentMainScreenList(
     popularBusinesses: List<Businesses>,
     navigationController: NavController
 ) {
     LazyColumn(
         contentPadding = PaddingValues(start = 10.dp)
     ){
-        stickyHeader{
+        item {
             Text(
                 text = "Nearby and open now",
                 modifier = Modifier

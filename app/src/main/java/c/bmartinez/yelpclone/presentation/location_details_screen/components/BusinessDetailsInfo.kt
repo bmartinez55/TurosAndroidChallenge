@@ -13,7 +13,7 @@ import c.bmartinez.yelpclone.domain.model.business_detail.BusinessDetails
 import c.bmartinez.yelpclone.utils.*
 
 @Composable
-fun LocationAdditionalInfo(location: BusinessDetails?){
+fun BusinessDetailsInfo(location: BusinessDetails?){
     Row(
         modifier = Modifier
             .padding(start = 20.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)

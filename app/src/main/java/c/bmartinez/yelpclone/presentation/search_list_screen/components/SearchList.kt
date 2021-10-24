@@ -15,20 +15,23 @@ import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 import c.bmartinez.yelpclone.presentation.Screen
 
 @Composable
-fun SearchRecyclerView(searchedLocations: List<Businesses>, navController: NavController) {
+fun SearchList(searchedLocations: List<Businesses>, navController: NavController) {
     Column {
-        Text(
-            text = "All Results",
-            modifier = Modifier
-                .padding(start = 0.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
-                .fillMaxWidth()
-            ,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
-            fontSize = 21.sp,
-            fontWeight = FontWeight.Bold
-        )
         LazyColumn{
+            item {
+                Text(
+                    text = "All Results",
+                    modifier = Modifier
+                        .padding(start = 0.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
+                        .fillMaxWidth()
+                    ,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    fontSize = 21.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
             itemsIndexed(items = searchedLocations) { index, searchedLocation ->
                 SearchListItem(searchItem = searchedLocation,
                     onClick = {

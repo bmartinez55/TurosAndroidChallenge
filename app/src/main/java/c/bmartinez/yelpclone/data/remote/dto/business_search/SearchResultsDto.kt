@@ -4,7 +4,7 @@ import c.bmartinez.yelpclone.data.remote.dto.common_dtos.CategoriesDto
 import c.bmartinez.yelpclone.domain.model.business_search.Businesses
 import com.google.gson.annotations.SerializedName
 
-data class SearchResults(
+data class SearchResultsDto(
     val rating: Double,
     val price: String?,
     val phone: String,
@@ -22,7 +22,7 @@ data class SearchResults(
     val transactions: List<String>
 )
 
-fun SearchResults.toBusinesses(): Businesses {
+fun SearchResultsDto.toBusinesses(): Businesses {
     return Businesses(
         rating = rating,
         price = price,
@@ -32,6 +32,7 @@ fun SearchResults.toBusinesses(): Businesses {
         name = name,
         imageUrl = imageUrl,
         location = location,
-        distance = distance
+        distance = distance,
+        transactions = transactions
     )
 }
